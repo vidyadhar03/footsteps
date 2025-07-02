@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 // Custom hook for intersection observer
-function useIntersectionObserver(options = {}): [React.RefObject<HTMLDivElement>, boolean] {
+function useIntersectionObserver(options = {}): [React.RefObject<HTMLDivElement | null>, boolean] {
   const [isInView, setIsInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -26,7 +27,7 @@ function useIntersectionObserver(options = {}): [React.RefObject<HTMLDivElement>
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [options]);
 
   return [ref, isInView];
 }
@@ -97,7 +98,7 @@ function WaitlistForm() {
       const result = await response.json();
 
       if (result.success) {
-        alert("🎉 Thank you for joining the waitlist! We'll be in touch soon.");
+        alert("🎉 Thank you for joining the waitlist! We&apos;ll be in touch soon.");
         // Reset form
         setEmail("");
         setSelectedFeatures([]);
@@ -139,10 +140,10 @@ function WaitlistForm() {
                 <div className="text-center space-y-8 py-8 lg:py-12">
                   <div className="space-y-4">
                     <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-tight">
-                      Let's start with your email
+                      Let&apos;s start with your email
                     </h3>
                     <p className="text-base sm:text-lg lg:text-xl text-subtle font-medium max-w-md mx-auto">
-                      We'll send you early access when Footsteps is ready
+                      We&apos;ll send you early access when Footsteps is ready
                     </p>
                   </div>
                   
@@ -452,9 +453,11 @@ export default function Home() {
             <div className="flex justify-center lg:justify-end">
               <div className="relative" style={{ zIndex: 10 }}>
                 {/* Mobile Screen Image */}
-                <img 
+                <Image 
                   src="/mobileScreen.jpeg"
                   alt="Footsteps Mobile App Screen"
+                  width={320}
+                  height={640}
                   className="w-72 lg:w-80 h-auto rounded-[3rem]"
                 />
               </div>
@@ -475,7 +478,7 @@ export default function Home() {
             <p className={`text-lg lg:text-xl text-subtle max-w-4xl mx-auto leading-relaxed font-medium transition-all duration-800 delay-200 ${
               headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             } ${headerInView ? 'animate-[slideInUp_0.8s_ease-out_0.4s_forwards]' : ''}`}>
-              Because travel is more than movement—it's identity, story, and community!
+              Because travel is more than movement—it&apos;s identity, story, and community!
             </p>
           </div>
 
@@ -495,7 +498,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-lg lg:text-xl font-bold text-primary mb-2 lg:mb-3 tracking-tight">Your Travel Identity</h3>
                 <p className="text-sm lg:text-base text-subtle leading-relaxed font-medium">
-                  Build a profile that reflects who you are through where you've been. Log distances, places, and soul-earned stats like Earth rotations.
+                  Build a profile that reflects who you are through where you&apos;ve been. Log distances, places, and soul-earned stats like Earth rotations.
                 </p>
               </div>
             </div>
