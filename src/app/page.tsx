@@ -271,7 +271,7 @@ function WaitlistForm() {
                         )}
                       </button>
                       <p className="text-subtle text-base lg:text-lg font-medium">
-                        🎉 Over 1,000 travelers already joined!
+                        🎉 Over 150+ travelers already joined!
                       </p>
                     </div>
                   </form>
