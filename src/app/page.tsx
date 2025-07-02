@@ -611,7 +611,7 @@ export default function Home() {
       <WaitlistForm />
 
       {/* Demo Section */}
-      <section id="demo" className="py-12 lg:py-20" style={{ backgroundColor: '#f7f9fb' }}>
+      {/* <section id="demo" className="py-12 lg:py-20" style={{ backgroundColor: '#f7f9fb' }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-10 lg:mb-14">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight">
@@ -641,7 +641,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
       <footer className="border-t border-border py-8 lg:py-12" style={{ backgroundColor: '#f7f9fb' }}>
