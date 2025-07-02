@@ -442,7 +442,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="text-center lg:text-left">
               <h1 className="text-3xl lg:text-5xl xl:text-6xl font-black text-primary mb-6 lg:mb-8 leading-tight tracking-tight">
-                Footsteps turns your journeys into stories, your stories into tribes, and your path into a travel identity.
+                Turn your journeys into stories, your stories into tribes, and your path into a travel identity.
               </h1>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button onClick={() => scrollToSection('waitlist')} className="bg-brand/90 text-white hover:bg-brand px-8 lg:px-10 py-4 lg:py-5 rounded-full text-lg lg:text-xl font-bold transition-all transform hover:scale-105 shadow-xl backdrop-blur-sm border border-white/10">
@@ -475,10 +475,10 @@ export default function Home() {
             } ${headerInView ? 'animate-[slideInUp_0.8s_ease-out_0.2s_forwards]' : ''}`}>
               Why Footsteps?
             </h2>
-            <p className={`text-lg lg:text-xl text-subtle max-w-4xl mx-auto leading-relaxed font-medium transition-all duration-800 delay-200 ${
+            <p className={`text-md lg:text-xl text-subtle max-w-4xl mx-auto leading-relaxed font-medium transition-all duration-800 delay-200 ${
               headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             } ${headerInView ? 'animate-[slideInUp_0.8s_ease-out_0.4s_forwards]' : ''}`}>
-              Because travel is more than movement—it&apos;s identity, story, and community!
+              Because travel is more than just movement—  it&apos;s identity, story, and community!
             </p>
           </div>
 
