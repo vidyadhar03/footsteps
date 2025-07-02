@@ -648,7 +648,6 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <h3 className="text-xl lg:text-2xl font-black text-primary mb-3 lg:mb-4 tracking-tight">Footsteps</h3>
-            <p className="text-sm lg:text-base text-subtle mb-4 lg:mb-6 font-medium">The Strava for travelers. Explore the world, one step at a time.</p>
             <div className="flex justify-center space-x-4 lg:space-x-6">
               <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
               <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Terms</a>
