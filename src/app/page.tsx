@@ -116,7 +116,7 @@ function WaitlistForm() {
   };
 
   return (
-    <section id="waitlist" className="py-16 lg:py-24" style={{ backgroundColor: '#f7f9fb' }}>
+    <section id="waitlist" className="py-16 lg:py-24" style={{ backgroundColor: '#F6F6F6' }}>
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 lg:mb-16">
@@ -302,7 +302,7 @@ function TopBar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-border/50" style={{ backgroundColor: 'rgba(247, 249, 251, 0.95)' }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-border/50" style={{ backgroundColor: 'rgba(246, 246, 246, 0.95)' }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -318,9 +318,6 @@ function TopBar() {
           <div className="hidden md:flex items-center space-x-8">
             <button onClick={() => scrollToSection('features')} className="text-primary hover:text-brand transition-colors duration-200 font-medium">
               Features
-            </button>
-            <button onClick={() => scrollToSection('demo')} className="text-primary hover:text-brand transition-colors duration-200 font-medium">
-              Demo
             </button>
             <button onClick={() => scrollToSection('waitlist')} className="text-primary hover:text-brand transition-colors duration-200 font-medium">
               Waitlist
@@ -347,7 +344,7 @@ function TopBar() {
         {/* Mobile menu dropdown */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border/50" style={{ backgroundColor: '#f7f9fb' }}>
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border/50" style={{ backgroundColor: '#F6F6F6' }}>
               <button 
                 onClick={() => {
                   scrollToSection('features');
@@ -356,15 +353,6 @@ function TopBar() {
                 className="block w-full text-left px-3 py-2 text-primary hover:text-brand transition-colors duration-200 font-medium"
               >
                 Features
-              </button>
-              <button 
-                onClick={() => {
-                  scrollToSection('demo');
-                  setIsMobileMenuOpen(false);
-                }}
-                className="block w-full text-left px-3 py-2 text-primary hover:text-brand transition-colors duration-200 font-medium"
-              >
-                Demo
               </button>
               <button 
                 onClick={() => {
@@ -397,6 +385,7 @@ function TopBar() {
 export default function Home() {
   const [headerRef, headerInView] = useIntersectionObserver({ threshold: 0.3 });
   const [cardsRef, cardsInView] = useIntersectionObserver({ threshold: 0.2 });
+  const [phoneAnimated, setPhoneAnimated] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -411,8 +400,16 @@ export default function Home() {
     }
   };
 
+  // Trigger phone animation on component mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setPhoneAnimated(true);
+    }, 300); // Slight delay for better UX
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen pt-16" style={{ backgroundColor: '#f7f9fb' }}>
+    <div className="min-h-screen pt-16" style={{ backgroundColor: '#F6F6F6' }}>
       {/* Topbar */}
       <TopBar />
 
@@ -456,9 +453,11 @@ export default function Home() {
                 <Image 
                   src="/mobileScreen.jpeg"
                   alt="Footsteps Mobile App Screen"
-                  width={320}
-                  height={640}
-                  className="w-72 lg:w-80 h-auto rounded-[3rem]"
+                  width={368}
+                  height={736}
+                  className={`w-84 lg:w-96 h-auto rounded-[3rem] transition-all duration-1000 ease-out ${
+                    phoneAnimated ? 'opacity-100 animate-[phoneEntrance_1.2s_ease-out_forwards]' : 'opacity-0'
+                  }`}
                 />
               </div>
             </div>
@@ -467,7 +466,7 @@ export default function Home() {
       </section>
 
       {/* Why Footsteps Section */}
-      <section id="features" className="py-12 lg:py-20" style={{ backgroundColor: '#f7f9fb' }}>
+      <section id="features" className="py-12 lg:py-20" style={{ backgroundColor: '#F6F6F6' }}>
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div ref={headerRef} className="text-center mb-12 lg:mb-16">
             <h2 className={`text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight transition-all duration-800 ${
@@ -611,7 +610,7 @@ export default function Home() {
       <WaitlistForm />
 
       {/* Demo Section */}
-      {/* <section id="demo" className="py-12 lg:py-20" style={{ backgroundColor: '#f7f9fb' }}>
+      {/* <section id="demo" className="py-12 lg:py-20" style={{ backgroundColor: '#F6F6F6' }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-10 lg:mb-14">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight">
@@ -644,7 +643,7 @@ export default function Home() {
       </section> */}
 
       {/* Footer */}
-      <footer className="border-t border-border py-8 lg:py-12" style={{ backgroundColor: '#f7f9fb' }}>
+      <footer className="border-t border-border py-8 lg:py-12" style={{ backgroundColor: '#F6F6F6' }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <h3 className="text-xl lg:text-2xl font-black text-primary mb-3 lg:mb-4 tracking-tight">Footsteps</h3>
@@ -653,7 +652,7 @@ export default function Home() {
               <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Terms</a>
               <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Contact</a>
             </div>
-            <p className="text-subtle text-xs lg:text-sm mt-6 lg:mt-8 opacity-70">© 2024 Footsteps. All rights reserved.</p>
+            <p className="text-subtle text-xs lg:text-sm mt-6 lg:mt-8 opacity-70">© 2025 Footsteps. All rights reserved.</p>
           </div>
         </div>
       </footer>

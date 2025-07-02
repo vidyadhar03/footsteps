@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #007AFF;
+  --color-brand: #1987FF;
   --color-brand-deep: #0056CC;
   --color-brand-light: #F0F8FF;
-  --color-surface: #FBFCFD;
-  --color-surface-alt: #f7f9fb;
-  --color-border: #E8F4F8;
-  --color-primary: #1D1D1F;
-  --color-subtle: #86868B;
+  --color-surface: #ffffff;
+  --color-surface-alt: #F6F6F6;
+  --color-border: #e5e7eb;
+  --color-primary: #1f2937;
+  --color-subtle: #6b7280;
+  --color-background: #ffffff;
 }
 
 /* You can still keep CSS variables for fonts etc. but we no longer set background or text colour directly here. */
@@ -47,5 +48,28 @@ html {
   100% {
     transform: scale(1) rotate(0deg);
     opacity: 1;
+  }
+}
+
+/* Modern mobile screen entrance animation */
+@keyframes phoneEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    filter: blur(3px);
+  }
+  60% {
+    opacity: 0.85;
+    transform: translateY(-3px) scale(1.01);
+    filter: blur(0px);
+  }
+  80% {
+    opacity: 0.95;
+    transform: translateY(1px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
   }
 }
