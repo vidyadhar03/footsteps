@@ -1,5 +1,35 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
+// Custom hook for intersection observer
+function useIntersectionObserver(options = {}): [React.RefObject<HTMLDivElement>, boolean] {
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          // Once animation is triggered, we can disconnect the observer
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the element is visible
+        ...options,
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, isInView];
+}
 
 function WaitlistForm() {
   const [step, setStep] = useState(1);
@@ -9,14 +39,13 @@ function WaitlistForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const features = [
-    "Offline Map Downloads",
-    "Group Trip Planning", 
-    "Local Food Recommendations",
-    "Budget Tracking",
-    "Photo Sharing Stories",
-    "Travel Safety Alerts",
-    "Local Guide Booking",
-    "Custom Travel Challenges"
+    "Write Day-Wise Travel Logs",
+    "Join Travel Tribes That Match You", 
+    "Track Distance & Earth Rotations",
+    "Explore Stories on a Map",
+    "Follow the Footsteps of Real Travelers",
+    "Save Travel Milestones",
+    "Access Your Stories Offline",
   ];
 
   const handleEmailSubmit = () => {
@@ -86,81 +115,68 @@ function WaitlistForm() {
   };
 
   return (
-    <section id="waitlist" className="py-24 lg:py-40 bg-surface-alt">
+    <section id="waitlist" className="py-12 lg:py-18 bg-surface-alt">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl lg:text-6xl font-black text-primary mb-8 tracking-tight">
-            Shape the App
+        <div className="text-center mb-8 lg:mb-10">
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-primary mb-4 lg:mb-6 tracking-tight">
+            Join the Waitlist
           </h2>
-          <p className="text-2xl text-subtle font-medium max-w-3xl mx-auto leading-relaxed">
-            We&apos;ll encourage us - would you like to see in Footsteps?
+          <p className="text-xl lg:text-2xl text-subtle font-medium max-w-3xl mx-auto leading-relaxed">
+            Be among the first to experience travel as identity, story, and connection
           </p>
-        </div>
-
-        {/* Progress indicator */}
-        <div className="flex justify-center mb-16">
-          <div className="flex items-center space-x-3 bg-white/60 backdrop-blur-sm px-6 py-3 rounded-full border border-border/30 shadow-sm">
-            {[1, 2, 3].map((stepNumber) => (
-              <div key={stepNumber} className="flex items-center">
-                <div
-                  className={`w-4 h-4 rounded-full transition-all duration-500 ${
-                    stepNumber <= step 
-                      ? 'bg-brand shadow-md shadow-brand/20' 
-                      : 'bg-border'
-                  }`}
-                />
-                {stepNumber < 3 && (
-                  <div className={`w-8 h-0.5 mx-2 transition-all duration-500 ${
-                    stepNumber < step ? 'bg-brand' : 'bg-border'
-                  }`} />
-                )}
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Form Container */}
         <div className="relative">
-          <div className="bg-white/80 backdrop-blur-xl p-10 lg:p-16 rounded-[2rem] border border-white/40 relative overflow-hidden shadow-2xl shadow-brand/5"
-               style={{ minHeight: '600px' }}>
+          <div className="bg-white/80 backdrop-blur-xl p-8 lg:p-12 xl:p-16 rounded-[2rem] border border-white/40 relative overflow-hidden shadow-2xl shadow-brand/5"
+               style={{ minHeight: '560px' }}>
             <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent pointer-events-none" />
             <div className="relative">
             
               {/* Step 1: Email */}
-              <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
+              <div className={`absolute inset-0 p-5 lg:p-8 xl:p-10 transition-all duration-500 ${
                 step === 1 ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
               }`}>
-                <div className="flex flex-col justify-between h-full min-h-[520px]">
-                  <div className="flex-1 flex flex-col justify-center">
-                    <div className="text-center mb-12">
-                      <h3 className="text-3xl lg:text-4xl font-black text-primary mb-6 tracking-tight">
+                <div className="h-full flex flex-col justify-between min-h-[480px]">
+                  {/* Top section with some spacing */}
+                  <div className="flex-shrink-0 pt-4 lg:pt-8">
+                    <div className="text-center">
+                      <h3 className="text-xl lg:text-3xl xl:text-4xl font-black text-primary mb-3 lg:mb-6 tracking-tight">
                         Let&apos;s start with your email
                       </h3>
-                      <p className="text-xl text-subtle font-medium">We&apos;ll send you early access when Footsteps is ready</p>
+                      <p className="text-base lg:text-xl text-subtle font-medium px-2">We&apos;ll send you early access when Footsteps is ready</p>
                     </div>
-                    
-                    <form onSubmit={(e) => { e.preventDefault(); handleEmailSubmit(); }} className="max-w-md mx-auto w-full space-y-8">
+                  </div>
+                  
+                  {/* Middle section - form */}
+                  <div className="flex-1 flex flex-col justify-center py-8 lg:py-12">
+                    <form onSubmit={(e) => { e.preventDefault(); handleEmailSubmit(); }} className="max-w-md mx-auto w-full space-y-6 lg:space-y-8">
                       <div className="relative">
                         <input 
                           type="email" 
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email address"
-                          className="w-full px-8 py-5 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-white/50 text-lg text-center bg-white/90 backdrop-blur-sm shadow-md focus:shadow-lg transition-all duration-200"
+                          className="w-full px-6 lg:px-8 py-4 lg:py-5 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-white/50 text-base lg:text-lg text-center bg-white/90 backdrop-blur-sm shadow-md focus:shadow-lg transition-all duration-200"
                           required
                         />
                       </div>
                       
-                      <div className="text-center pt-6">
+                      <div className="text-center pt-2 lg:pt-4">
                         <button 
                           type="submit"
-                          className="bg-brand/80 text-white px-12 py-4 rounded-2xl font-bold text-xl hover:bg-brand transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                          className="bg-brand/80 text-white px-10 lg:px-12 py-3 lg:py-4 rounded-2xl font-bold text-lg lg:text-xl hover:bg-brand transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
                         >
                           Continue →
                         </button>
                       </div>
                     </form>
+                  </div>
+                  
+                  {/* Bottom section with padding */}
+                  <div className="flex-shrink-0 pb-4 lg:pb-8">
+                    {/* Optional: Add some bottom content or just spacing */}
                   </div>
                 </div>
               </div>
@@ -170,11 +186,11 @@ function WaitlistForm() {
                 step === 2 ? 'translate-x-0 opacity-100' : step < 2 ? 'translate-x-full opacity-0' : '-translate-x-full opacity-0'
               }`}>
                 <div className="h-full flex flex-col min-h-[520px]">
-                  <div className="text-center mb-6">
-                    <h3 className="text-3xl lg:text-4xl font-black text-primary mb-4 tracking-tight">
-                      What features excite you most?
+                  <div className="text-center mb-4 lg:mb-6">
+                    <h3 className="text-xl lg:text-3xl xl:text-4xl font-black text-primary mb-2 lg:mb-4 tracking-tight">
+                      What matters most to your journey?
                     </h3>
-                    <p className="text-xl text-subtle font-medium">Select all that interest you (optional)</p>
+                    <p className="text-sm lg:text-xl text-subtle font-medium">Select the features that excite you. Your choices help shape the future of Footsteps.</p>
                   </div>
                   
                   {/* Scrollable feature list */}
@@ -387,6 +403,9 @@ function TopBar() {
 }
 
 export default function Home() {
+  const [headerRef, headerInView] = useIntersectionObserver({ threshold: 0.3 });
+  const [cardsRef, cardsInView] = useIntersectionObserver({ threshold: 0.2 });
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -406,7 +425,7 @@ export default function Home() {
       <TopBar />
 
       {/* Hero Section */}
-      <section className="relative px-6 py-20 lg:px-8 lg:py-32 overflow-hidden">
+      <section className="relative px-6 py-12 lg:px-8 lg:py-20 overflow-hidden">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full">
           <video
@@ -427,13 +446,13 @@ export default function Home() {
         
         {/* Content overlay */}
         <div className="relative mx-auto max-w-7xl" style={{ zIndex: 10 }}>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="text-center lg:text-left">
-              <h1 className="text-4xl lg:text-6xl font-black text-white mb-8 leading-tight tracking-tight drop-shadow-xl">
-                Join a global community of travelers to share itineraries, connect deeply, and track every step of your journey.
+              <h1 className="text-3xl lg:text-5xl xl:text-6xl font-black text-white mb-6 lg:mb-8 leading-tight tracking-tight drop-shadow-xl">
+                Footsteps turns your journeys into stories, your stories into tribes, and your path into a travel identity.
               </h1>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button onClick={() => scrollToSection('waitlist')} className="bg-brand/90 text-white hover:bg-brand px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-xl backdrop-blur-sm border border-white/10">
+                <button onClick={() => scrollToSection('waitlist')} className="bg-brand/90 text-white hover:bg-brand px-8 lg:px-10 py-4 lg:py-5 rounded-full text-lg lg:text-xl font-bold transition-all transform hover:scale-105 shadow-xl backdrop-blur-sm border border-white/10">
                   Join the Waitlist
                 </button>
               </div>
@@ -441,7 +460,7 @@ export default function Home() {
             <div className="flex justify-center lg:justify-end">
               <div className="relative" style={{ zIndex: 10 }}>
                 {/* Phone Mockup */}
-                <div className="w-80 h-[600px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl backdrop-blur-sm">
+                <div className="w-72 lg:w-80 h-[540px] lg:h-[600px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl backdrop-blur-sm">
                   <div className="w-full h-full rounded-[2.5rem] overflow-hidden relative">
                     {/* Beautiful Coastal Background */}
                     <div 
@@ -535,79 +554,139 @@ export default function Home() {
       </section>
 
       {/* Why Footsteps Section */}
-      <section id="features" className="py-20 lg:py-32 bg-surface-alt">
+      <section id="features" className="py-12 lg:py-20 bg-surface-alt">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-black text-primary mb-6 tracking-tight">
+          <div ref={headerRef} className="text-center mb-12 lg:mb-16">
+            <h2 className={`text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight transition-all duration-800 ${
+              headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            } ${headerInView ? 'animate-[slideInUp_0.8s_ease-out_0.2s_forwards]' : ''}`}>
               Why Footsteps?
             </h2>
-            <p className="text-xl text-subtle max-w-4xl mx-auto leading-relaxed font-medium">
-              Footsteps brings travelers together, fostering a sense of connection and community that goes beyond mere travel logs.
+            <p className={`text-lg lg:text-xl text-subtle max-w-4xl mx-auto leading-relaxed font-medium transition-all duration-800 delay-200 ${
+              headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            } ${headerInView ? 'animate-[slideInUp_0.8s_ease-out_0.4s_forwards]' : ''}`}>
+              Because travel is more than movement—it's identity, story, and community!
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Interactive Maps */}
-            <div className="text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden">
+          <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {/* Your Travel Identity */}
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.1s_forwards]' : 'opacity-0 translate-y-8'
+            }`}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
-                  <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
+                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_0.5s_forwards]' : 'opacity-0'
+                }`}>
+                  <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg lg:text-xl font-bold text-primary mb-2 lg:mb-3 tracking-tight">Your Travel Identity</h3>
+                <p className="text-sm lg:text-base text-subtle leading-relaxed font-medium">
+                  Build a profile that reflects who you are through where you've been. Log distances, places, and soul-earned stats like Earth rotations.
+                </p>
+              </div>
+            </div>
+
+            {/* Footsteps Map */}
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.3s_forwards]' : 'opacity-0 translate-y-8'
+            }`}>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
+              <div className="relative">
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
+                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_0.7s_forwards]' : 'opacity-0'
+                }`}>
+                  <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Interactive Maps</h3>
-                <p className="text-subtle leading-relaxed font-medium">
-                  Explore interactive map insights and discover new destinations.
+                <h3 className="text-lg lg:text-xl font-bold text-primary mb-2 lg:mb-3 tracking-tight">Footsteps Map</h3>
+                <p className="text-sm lg:text-base text-subtle leading-relaxed font-medium">
+                  Relive stories across the map—your own, and those who walked paths before you.
                 </p>
               </div>
             </div>
 
-            {/* Friend Visits */}
-            <div className="text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden">
+            {/* Journey Stories */}
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.5s_forwards]' : 'opacity-0 translate-y-8'
+            }`}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
-                  <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Friend Visits</h3>
-                <p className="text-subtle leading-relaxed font-medium">
-                  Connect with fellow travelers and see where they&apos;ve been.
-                </p>
-              </div>
-            </div>
-
-            {/* Itinerary Guides */}
-            <div className="text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
-                  <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
+                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_0.9s_forwards]' : 'opacity-0'
+                }`}>
+                  <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Itinerary Guides</h3>
-                <p className="text-subtle leading-relaxed font-medium">
-                  Access detailed itineraries and curated travel guides.
+                <h3 className="text-lg lg:text-xl font-bold text-primary mb-2 lg:mb-3 tracking-tight">Journey Stories</h3>
+                <p className="text-sm lg:text-base text-subtle leading-relaxed font-medium">
+                  Turn your trips into day-wise, story-driven travel logs—real journeys written by real people. 
                 </p>
               </div>
             </div>
 
-            {/* Tribe Updates */}
-            <div className="text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden">
+            {/* Tribe Circles */}
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.7s_forwards]' : 'opacity-0 translate-y-8'
+            }`}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
-                  <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
+                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_1.1s_forwards]' : 'opacity-0'
+                }`}>
+                  <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Tribe Updates</h3>
-                <p className="text-subtle leading-relaxed font-medium">
-                  Keep up with insights and updates from your travel community.
+                <h3 className="text-lg lg:text-xl font-bold text-primary mb-2 lg:mb-3 tracking-tight">Tribe Circles</h3>
+                <p className="text-sm lg:text-base text-subtle leading-relaxed font-medium">
+                 Find and follow your travel kind—slow walkers, mountain seekers, bikepackers, poetic nomads. Join by spirit, not by algorithm.
+                </p>
+              </div>
+            </div>
+
+            {/* Lived Journeys */}
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.9s_forwards]' : 'opacity-0 translate-y-8'
+            }`}>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
+              <div className="relative">
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
+                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_1.3s_forwards]' : 'opacity-0'
+                }`}>
+                  <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h3 className="text-lg lg:text-xl font-bold text-primary mb-2 lg:mb-3 tracking-tight">Lived Journeys</h3>
+                <p className="text-sm lg:text-base text-subtle leading-relaxed font-medium">
+                  Explore powerful travel stories, curated for depth—not dopamine. Real experiences, slow and intentional.
+                </p>
+              </div>
+            </div>
+
+            {/* Real Connections */}
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_1.1s_forwards]' : 'opacity-0 translate-y-8'
+            }`}>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
+              <div className="relative">
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
+                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_1.5s_forwards]' : 'opacity-0'
+                }`}>
+                  <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg lg:text-xl font-bold text-primary mb-2 lg:mb-3 tracking-tight">Real Connections</h3>
+                <p className="text-sm lg:text-base text-subtle leading-relaxed font-medium">
+                  Follow fellow travelers and explore their lived stories, not just their destinations.
                 </p>
               </div>
             </div>
@@ -619,13 +698,13 @@ export default function Home() {
       <WaitlistForm />
 
       {/* Demo Section */}
-      <section id="demo" className="py-20 lg:py-32 bg-surface-alt">
+      <section id="demo" className="py-12 lg:py-20 bg-surface-alt">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-black text-primary mb-6 tracking-tight">
+          <div className="text-center mb-10 lg:mb-14">
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight">
               See Footsteps in Action
             </h2>
-            <p className="text-xl text-subtle max-w-3xl mx-auto mb-10 font-medium">
+            <p className="text-lg lg:text-xl text-subtle max-w-3xl mx-auto mb-6 lg:mb-8 font-medium">
               Watch how travelers are already using Footsteps to plan their perfect adventures.
             </p>
           </div>
@@ -634,15 +713,15 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
             <div className="relative">
               <div className="aspect-video bg-gradient-to-br from-white/50 to-white/30 flex items-center justify-center">
-                <button className="bg-white/95 backdrop-blur-sm p-6 rounded-full hover:bg-white transition-all transform hover:scale-110 shadow-xl hover:shadow-2xl">
-                  <svg className="w-12 h-12 text-brand" fill="currentColor" viewBox="0 0 24 24">
+                <button className="bg-white/95 backdrop-blur-sm p-5 lg:p-6 rounded-full hover:bg-white transition-all transform hover:scale-110 shadow-xl hover:shadow-2xl">
+                  <svg className="w-10 h-10 lg:w-12 lg:h-12 text-brand" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </button>
               </div>
-              <div className="p-8 bg-white/80 backdrop-blur-sm">
-                <h3 className="text-2xl font-black text-primary mb-4 tracking-tight">Interactive Demo</h3>
-                <p className="text-subtle font-medium">
+              <div className="p-6 lg:p-8 bg-white/80 backdrop-blur-sm">
+                <h3 className="text-xl lg:text-2xl font-black text-primary mb-3 lg:mb-4 tracking-tight">Interactive Demo</h3>
+                <p className="text-sm lg:text-base text-subtle font-medium">
                   Explore hidden gems, connect with fellow travelers, and plan your next adventure with our intuitive mobile app.
                 </p>
               </div>
@@ -652,17 +731,17 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-surface-alt border-t border-border py-12">
+      <footer className="bg-surface-alt border-t border-border py-8 lg:py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
-            <h3 className="text-2xl font-black text-primary mb-4 tracking-tight">Footsteps</h3>
-            <p className="text-subtle mb-6 font-medium">The Strava for travelers. Explore the world, one step at a time.</p>
-            <div className="flex justify-center space-x-6">
-              <a href="#" className="text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
-              <a href="#" className="text-subtle hover:text-brand transition-colors font-medium">Terms</a>
-              <a href="#" className="text-subtle hover:text-brand transition-colors font-medium">Contact</a>
+            <h3 className="text-xl lg:text-2xl font-black text-primary mb-3 lg:mb-4 tracking-tight">Footsteps</h3>
+            <p className="text-sm lg:text-base text-subtle mb-4 lg:mb-6 font-medium">The Strava for travelers. Explore the world, one step at a time.</p>
+            <div className="flex justify-center space-x-4 lg:space-x-6">
+              <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
+              <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Terms</a>
+              <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Contact</a>
             </div>
-            <p className="text-subtle text-sm mt-8 opacity-70">© 2024 Footsteps. All rights reserved.</p>
+            <p className="text-subtle text-xs lg:text-sm mt-6 lg:mt-8 opacity-70">© 2024 Footsteps. All rights reserved.</p>
           </div>
         </div>
       </footer>
