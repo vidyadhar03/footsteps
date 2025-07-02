@@ -504,14 +504,14 @@ export default function Home() {
       <section id="features" className="py-12 lg:py-20" style={{ backgroundColor: '#F6F6F6' }}>
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div ref={headerRef} className="text-center mb-12 lg:mb-16">
-            <h2 className={`text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight transition-all duration-800 ${
-              headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            } ${headerInView ? 'animate-[slideInUp_0.8s_ease-out_0.2s_forwards]' : ''}`}>
+            <h2 className={`text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight transition-all duration-700 ease-out ${
+              headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: headerInView ? '100ms' : '0ms' }}>
               Why Footsteps?
             </h2>
-            <p className={`text-md lg:text-xl text-subtle max-w-4xl mx-auto leading-relaxed font-medium transition-all duration-800 delay-200 ${
-              headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            } ${headerInView ? 'animate-[slideInUp_0.8s_ease-out_0.4s_forwards]' : ''}`}>
+            <p className={`text-md lg:text-xl text-subtle max-w-4xl mx-auto leading-relaxed font-medium transition-all duration-700 ease-out ${
+              headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: headerInView ? '300ms' : '0ms' }}>
               Because travel is more than just movement—  it&apos;s identity, story, and community!
             </p>
           </div>
