@@ -19,8 +19,7 @@ function WaitlistForm() {
     "Custom Travel Challenges"
   ];
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleEmailSubmit = () => {
     if (email) {
       setStep(2);
       
@@ -50,9 +49,7 @@ function WaitlistForm() {
     );
   };
 
-  const handleFinalSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const handleFinalSubmit = async () => {
     setIsSubmitting(true);
     
     try {
@@ -89,165 +86,189 @@ function WaitlistForm() {
   };
 
   return (
-    <section id="waitlist" className="py-20 lg:py-32 bg-gradient-to-br from-brand to-brand-deep">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
+    <section id="waitlist" className="py-24 lg:py-40 bg-surface-alt">
+      <div className="mx-auto max-w-5xl px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl lg:text-6xl font-black text-primary mb-8 tracking-tight">
             Shape the App
           </h2>
-          <p className="text-xl text-white text-opacity-95 drop-shadow">
+          <p className="text-2xl text-subtle font-medium max-w-3xl mx-auto leading-relaxed">
             We&apos;ll encourage us - would you like to see in Footsteps?
           </p>
         </div>
 
         {/* Progress indicator */}
-        <div className="flex justify-center mb-12">
-          <div className="flex space-x-4">
+        <div className="flex justify-center mb-16">
+          <div className="flex items-center space-x-3 bg-white/60 backdrop-blur-sm px-6 py-3 rounded-full border border-border/30 shadow-sm">
             {[1, 2, 3].map((stepNumber) => (
-              <div
-                key={stepNumber}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  stepNumber <= step ? 'bg-white' : 'bg-white bg-opacity-30'
-                }`}
-              />
+              <div key={stepNumber} className="flex items-center">
+                <div
+                  className={`w-4 h-4 rounded-full transition-all duration-500 ${
+                    stepNumber <= step 
+                      ? 'bg-brand shadow-md shadow-brand/20' 
+                      : 'bg-border'
+                  }`}
+                />
+                {stepNumber < 3 && (
+                  <div className={`w-8 h-0.5 mx-2 transition-all duration-500 ${
+                    stepNumber < step ? 'bg-brand' : 'bg-border'
+                  }`} />
+                )}
+              </div>
             ))}
           </div>
         </div>
 
         {/* Form Container */}
-        <div className="bg-surface-alt p-8 lg:p-12 rounded-3xl border border-border relative overflow-hidden shadow-xl"
-             style={{ minHeight: '500px' }}>
-          
-          {/* Step 1: Email */}
-          <div className={`absolute inset-0 p-8 lg:p-12 transition-all duration-500 ${
-            step === 1 ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
-          }`}>
-            <div className="flex flex-col justify-center h-full min-h-[400px]">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl lg:text-3xl font-black text-primary mb-4 tracking-tight">
-                  👋 Let&apos;s start with your email
-                </h3>
-                <p className="text-subtle font-medium">We&apos;ll send you early access when Footsteps is ready</p>
-              </div>
-              
-              <form onSubmit={handleEmailSubmit} className="space-y-6">
-                <input 
-                  type="email" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  className="w-full px-6 py-4 rounded-xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand border border-border text-xl text-center bg-surface"
-                  required
-                />
-                <div className="text-center">
-                  <button 
-                    type="submit"
-                    className="bg-brand text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-brand-deep transition-all transform hover:scale-105 shadow-lg"
-                  >
-                    Continue →
-                  </button>
+        <div className="relative">
+          <div className="bg-white/80 backdrop-blur-xl p-10 lg:p-16 rounded-[2rem] border border-white/40 relative overflow-hidden shadow-2xl shadow-brand/5"
+               style={{ minHeight: '520px' }}>
+            <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent pointer-events-none" />
+            <div className="relative">
+            
+              {/* Step 1: Email */}
+              <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
+                step === 1 ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+              }`}>
+                <div className="flex flex-col justify-between h-full min-h-[440px]">
+                  <div className="flex-1 flex flex-col justify-center">
+                    <div className="text-center mb-12">
+                      <h3 className="text-3xl lg:text-4xl font-black text-primary mb-6 tracking-tight">
+                        Let&apos;s start with your email
+                      </h3>
+                      <p className="text-xl text-subtle font-medium">We&apos;ll send you early access when Footsteps is ready</p>
+                    </div>
+                    
+                    <form onSubmit={(e) => { e.preventDefault(); handleEmailSubmit(); }} className="max-w-md mx-auto w-full space-y-8">
+                      <div className="relative">
+                        <input 
+                          type="email" 
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Enter your email address"
+                          className="w-full px-8 py-5 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-border/50 text-lg text-center bg-white/80 backdrop-blur-sm shadow-sm focus:shadow-md transition-all duration-200"
+                          required
+                        />
+                      </div>
+                      
+                      <div className="text-center pt-6">
+                        <button 
+                          type="submit"
+                          className="bg-brand/80 text-white px-12 py-4 rounded-2xl font-bold text-xl hover:bg-brand transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                        >
+                          Continue →
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-              </form>
-            </div>
-          </div>
-
-          {/* Step 2: Features */}
-          <div className={`absolute inset-0 p-8 lg:p-12 transition-all duration-500 ${
-            step === 2 ? 'translate-x-0 opacity-100' : step < 2 ? 'translate-x-full opacity-0' : '-translate-x-full opacity-0'
-          }`}>
-            <div className="h-full flex flex-col min-h-[400px]">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl lg:text-3xl font-black text-primary mb-4 tracking-tight">
-                  ✨ What features excite you most?
-                </h3>
-                <p className="text-subtle font-medium">Select all that interest you (optional)</p>
               </div>
-              
-              {/* Scrollable feature list */}
-              <div className="flex-1 overflow-y-auto mb-6">
-                <div className="grid md:grid-cols-2 gap-3">
-                  {features.map((feature) => (
-                    <label 
-                      key={feature} 
-                      className={`flex items-center p-4 rounded-xl cursor-pointer transition-all border ${
-                        selectedFeatures.includes(feature)
-                          ? 'bg-brand-light border-brand'
-                          : 'bg-surface border-border hover:border-brand'
-                      }`}
-                      onClick={() => handleFeatureToggle(feature)}
+
+              {/* Step 2: Features */}
+              <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
+                step === 2 ? 'translate-x-0 opacity-100' : step < 2 ? 'translate-x-full opacity-0' : '-translate-x-full opacity-0'
+              }`}>
+                <div className="h-full flex flex-col min-h-[440px]">
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl lg:text-4xl font-black text-primary mb-6 tracking-tight">
+                      What features excite you most?
+                    </h3>
+                    <p className="text-xl text-subtle font-medium">Select all that interest you (optional)</p>
+                  </div>
+                  
+                  {/* Scrollable feature list */}
+                  <div className="flex-1 overflow-y-auto mb-6 px-2">
+                    <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+                      {features.map((feature) => (
+                        <div 
+                          key={feature} 
+                          className={`flex items-center p-6 rounded-2xl cursor-pointer transition-all border ${
+                            selectedFeatures.includes(feature)
+                              ? 'bg-white/90 border-brand shadow-md shadow-brand/10'
+                              : 'bg-white/60 border-border/50 hover:border-brand/60 hover:bg-white/80'
+                          }`}
+                          onClick={() => handleFeatureToggle(feature)}
+                        >
+                          <input 
+                            type="checkbox" 
+                            checked={selectedFeatures.includes(feature)}
+                            onChange={() => {}}
+                            className="mr-5 w-5 h-5 text-brand rounded pointer-events-none"
+                            tabIndex={-1}
+                          />
+                          <span className="text-primary font-semibold text-lg">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Fixed continue button at bottom */}
+                  <div className="text-center pt-6 border-t border-border/30">
+                    <button 
+                      onClick={handleFeaturesSubmit}
+                      className="bg-brand/80 text-white px-12 py-4 rounded-2xl font-bold text-xl hover:bg-brand transition-all transform hover:scale-105 shadow-lg hover:shadow-xl w-full md:w-auto"
                     >
-                      <input 
-                        type="checkbox" 
-                        checked={selectedFeatures.includes(feature)}
-                        onChange={() => {}}
-                        className="mr-3 w-4 h-4 text-brand"
-                      />
-                      <span className="text-primary font-semibold">{feature}</span>
-                    </label>
-                  ))}
+                      Continue →
+                    </button>
+                  </div>
                 </div>
               </div>
-              
-              {/* Fixed continue button at bottom */}
-              <div className="text-center pt-4 border-t border-border bg-surface-alt">
-                <button 
-                  onClick={handleFeaturesSubmit}
-                  className="bg-brand text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-brand-deep transition-all transform hover:scale-105 shadow-lg w-full md:w-auto"
-                >
-                  Continue →
-                </button>
-              </div>
-            </div>
-          </div>
 
-          {/* Step 3: Comments */}
-          <div className={`absolute inset-0 p-8 lg:p-12 transition-all duration-500 ${
-            step === 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-          }`}>
-            <div className="flex flex-col justify-center h-full min-h-[400px]">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl lg:text-3xl font-black text-primary mb-4 tracking-tight">
-                  💭 Any ideas or feedback?
-                </h3>
-                <p className="text-subtle font-medium">Help us build the perfect travel companion (optional)</p>
-              </div>
-              
-              <form onSubmit={handleFinalSubmit} className="space-y-6">
-                <textarea 
-                  value={comments}
-                  onChange={(e) => setComments(e.target.value)}
-                  rows={6}
-                  placeholder="Share your travel ideas or what excites you about Footsteps..."
-                  className="w-full px-6 py-6 rounded-xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand border border-border text-lg resize-none bg-surface"
-                />
-                <div className="text-center space-y-4">
-                  <button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`px-12 py-4 rounded-xl font-bold text-lg transition-all shadow-xl ${
-                      isSubmitting 
-                        ? 'bg-gray-400 cursor-not-allowed text-white' 
-                        : 'bg-brand text-white hover:bg-brand-deep transform hover:scale-105'
-                    }`}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Joining...
-                      </>
-                    ) : (
-                      '🚀 Join Waitlist'
-                    )}
-                  </button>
-                  <p className="text-subtle text-sm font-medium">
-                    🎉 Over 1,000 travelers already joined!
-                  </p>
+              {/* Step 3: Comments */}
+              <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
+                step === 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+              }`}>
+                <div className="flex flex-col justify-between h-full min-h-[440px]">
+                  <div className="flex-1 flex flex-col justify-center">
+                    <div className="text-center mb-8">
+                      <h3 className="text-3xl lg:text-4xl font-black text-primary mb-6 tracking-tight">
+                        Any ideas or feedback?
+                      </h3>
+                      <p className="text-xl text-subtle font-medium">Help us build the perfect travel companion (optional)</p>
+                    </div>
+                    
+                    <form onSubmit={(e) => { e.preventDefault(); handleFinalSubmit(); }} className="max-w-2xl mx-auto w-full">
+                      <div className="relative">
+                        <textarea 
+                          value={comments}
+                          onChange={(e) => setComments(e.target.value)}
+                          rows={6}
+                          placeholder="Share your travel ideas or what excites you about Footsteps..."
+                          className="w-full px-8 py-6 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-border/50 text-lg resize-none bg-white/80 backdrop-blur-sm shadow-sm focus:shadow-md transition-all duration-200"
+                        />
+                      </div>
+                      
+                      <div className="text-center pt-6 space-y-4">
+                        <button 
+                          type="submit"
+                          disabled={isSubmitting}
+                          className={`px-16 py-5 rounded-2xl font-bold text-xl transition-all shadow-xl ${
+                            isSubmitting 
+                              ? 'bg-gray-400 cursor-not-allowed text-white' 
+                              : 'bg-brand/80 text-white hover:bg-brand transform hover:scale-105 hover:shadow-2xl'
+                          }`}
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <svg className="animate-spin -ml-1 mr-3 h-6 w-6 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 714 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                              Joining...
+                            </>
+                          ) : (
+                            '🚀 Join Waitlist'
+                          )}
+                        </button>
+                        <p className="text-subtle text-lg font-medium">
+                          🎉 Over 1,000 travelers already joined!
+                        </p>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -297,7 +318,7 @@ function TopBar() {
               Waitlist
             </button>
             {/* CTA Button */}
-            <button onClick={() => scrollToSection('waitlist')} className="bg-brand hover:bg-brand-deep text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-sm hover:shadow-md">
+            <button onClick={() => scrollToSection('waitlist')} className="bg-brand/80 hover:bg-brand text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-sm hover:shadow-md">
               Join Waitlist
             </button>
           </div>
@@ -352,7 +373,7 @@ function TopBar() {
                     scrollToSection('waitlist');
                     setIsMobileMenuOpen(false);
                   }}
-                  className="block w-full bg-brand hover:bg-brand-deep text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 text-center mx-3"
+                  className="block w-full bg-brand/80 hover:bg-brand text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 text-center mx-3"
                 >
                   Join Waitlist
                 </button>
@@ -380,20 +401,20 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-surface pt-16">
+    <div className="min-h-screen bg-surface-alt pt-16">
       {/* Topbar */}
       <TopBar />
 
       {/* Hero Section */}
-      <section className="relative px-6 py-20 lg:px-8 lg:py-32 bg-gradient-to-br from-brand-light to-brand-deep">
+      <section className="relative px-6 py-20 lg:px-8 lg:py-32 bg-surface-alt">
         <div className="mx-auto max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="text-center lg:text-left">
-              <h1 className="text-4xl lg:text-6xl font-black text-white mb-8 leading-tight drop-shadow-2xl tracking-tight">
+              <h1 className="text-4xl lg:text-6xl font-black text-primary mb-8 leading-tight tracking-tight">
                 Join a global community of travelers to share itineraries, connect deeply, and track every step of your journey.
               </h1>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button onClick={() => scrollToSection('waitlist')} className="bg-white text-brand hover:bg-blue-50 hover:text-brand-deep px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-2xl border-2 border-white/20">
+                <button onClick={() => scrollToSection('waitlist')} className="bg-brand/80 text-white hover:bg-brand px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
                   Join the Waitlist
                 </button>
               </div>
@@ -508,8 +529,8 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Interactive Maps */}
-            <div className="text-center p-6 border border-border rounded-xl bg-brand-light hover:shadow-lg hover:bg-brand-light/80 transition-all">
-              <div className="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="text-center p-8 rounded-2xl bg-surface-alt hover:bg-surface-alt shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50">
+              <div className="w-16 h-16 bg-gradient-to-br from-brand/5 to-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                 <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -522,8 +543,8 @@ export default function Home() {
             </div>
 
             {/* Friend Visits */}
-            <div className="text-center p-6 border border-border rounded-xl bg-brand-light hover:shadow-lg hover:bg-brand-light/80 transition-all">
-              <div className="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="text-center p-8 rounded-2xl bg-surface-alt hover:bg-surface-alt shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50">
+              <div className="w-16 h-16 bg-gradient-to-br from-brand/5 to-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                 <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                 </svg>
@@ -535,8 +556,8 @@ export default function Home() {
             </div>
 
             {/* Itinerary Guides */}
-            <div className="text-center p-6 border border-border rounded-xl bg-brand-light hover:shadow-lg hover:bg-brand-light/80 transition-all">
-              <div className="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="text-center p-8 rounded-2xl bg-surface-alt hover:bg-surface-alt shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50">
+              <div className="w-16 h-16 bg-gradient-to-br from-brand/5 to-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                 <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
@@ -548,8 +569,8 @@ export default function Home() {
             </div>
 
             {/* Tribe Updates */}
-            <div className="text-center p-6 border border-border rounded-xl bg-brand-light hover:shadow-lg hover:bg-brand-light/80 transition-all">
-              <div className="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="text-center p-8 rounded-2xl bg-surface-alt hover:bg-surface-alt shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50">
+              <div className="w-16 h-16 bg-gradient-to-br from-brand/5 to-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                 <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
@@ -567,7 +588,7 @@ export default function Home() {
       <WaitlistForm />
 
       {/* Demo Section */}
-      <section id="demo" className="py-20 lg:py-32 bg-surface">
+      <section id="demo" className="py-20 lg:py-32 bg-surface-alt">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-black text-primary mb-6 tracking-tight">
@@ -579,9 +600,9 @@ export default function Home() {
           </div>
           
           <div className="bg-surface-alt rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto border border-border">
-            <div className="aspect-video bg-gradient-to-br from-brand to-brand-deep flex items-center justify-center">
-              <button className="bg-white bg-opacity-20 backdrop-blur-sm p-6 rounded-full hover:bg-opacity-30 transition-all transform hover:scale-110">
-                <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <div className="aspect-video bg-surface-alt flex items-center justify-center">
+              <button className="bg-white bg-opacity-90 backdrop-blur-sm p-6 rounded-full hover:bg-opacity-100 transition-all transform hover:scale-110 shadow-lg">
+                <svg className="w-12 h-12 text-brand" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
               </button>
@@ -597,7 +618,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-surface border-t border-border py-12">
+      <footer className="bg-surface-alt border-t border-border py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <h3 className="text-2xl font-black text-primary mb-4 tracking-tight">Footsteps</h3>

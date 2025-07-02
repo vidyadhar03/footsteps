@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #2563EB;
-  --color-brand-deep: #1D4ED8;
-  --color-brand-light: #EFF6FF;
-  --color-surface: #FAFAFA;
-  --color-surface-alt: #FFFFFF;
-  --color-border: #E5E7EB;
-  --color-primary: #111827;
-  --color-subtle: #6B7280;
+  --color-brand: #007AFF;
+  --color-brand-deep: #0056CC;
+  --color-brand-light: #F0F8FF;
+  --color-surface: #FBFCFD;
+  --color-surface-alt: #f7f9fb;
+  --color-border: #E8F4F8;
+  --color-primary: #1D1D1F;
+  --color-subtle: #86868B;
 }
 
 /* You can still keep CSS variables for fonts etc. but we no longer set background or text colour directly here. */
