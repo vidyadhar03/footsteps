@@ -38,6 +38,7 @@ function WaitlistForm() {
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
   const [comments, setComments] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error' | null, text: string }>({ type: null, text: '' });
 
   const features = [
     "Write Day-Wise Travel Logs",
@@ -81,6 +82,7 @@ function WaitlistForm() {
 
   const handleFinalSubmit = async () => {
     setIsSubmitting(true);
+    setSubmitMessage({ type: null, text: '' }); // Clear any previous messages
     
     try {
       const response = await fetch('/api/waitlist', {
@@ -98,18 +100,30 @@ function WaitlistForm() {
       const result = await response.json();
 
       if (result.success) {
-        alert("🎉 Thank you for joining the waitlist! We&apos;ll be in touch soon.");
-        // Reset form
-        setEmail("");
-        setSelectedFeatures([]);
-        setComments("");
-        setStep(1);
+        setSubmitMessage({ 
+          type: 'success', 
+          text: "🎉 Thank you for joining the waitlist! We'll be in touch soon." 
+        });
+        // Reset form after a delay to show success message
+        setTimeout(() => {
+          setEmail("");
+          setSelectedFeatures([]);
+          setComments("");
+          setStep(1);
+          setSubmitMessage({ type: null, text: '' });
+        }, 3000);
       } else {
-        alert(`Error: ${result.message}`);
+        setSubmitMessage({ 
+          type: 'error', 
+          text: `Error: ${result.message}` 
+        });
       }
     } catch (error) {
       console.error('Submission error:', error);
-      alert('Something went wrong. Please try again later.');
+      setSubmitMessage({ 
+        type: 'error', 
+        text: 'Something went wrong. Please try again later.' 
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -262,7 +276,7 @@ function WaitlistForm() {
                           <div className="flex items-center justify-center">
                             <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 714 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
                             Joining...
                           </div>
@@ -270,6 +284,18 @@ function WaitlistForm() {
                           '🚀 Join Waitlist'
                         )}
                       </button>
+                      
+                      {/* Success/Error Message */}
+                      {submitMessage.type && (
+                        <div className={`p-4 rounded-xl border-2 transition-all duration-300 ${
+                          submitMessage.type === 'success' 
+                            ? 'bg-green-50 border-green-200 text-green-800' 
+                            : 'bg-red-50 border-red-200 text-red-800'
+                        }`}>
+                          <p className="font-semibold text-base lg:text-lg">{submitMessage.text}</p>
+                        </div>
+                      )}
+                      
                       <p className="text-subtle text-base lg:text-lg font-medium">
                         🎉 Over 150+ travelers already joined!
                       </p>
