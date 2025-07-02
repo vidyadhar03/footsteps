@@ -406,23 +406,42 @@ export default function Home() {
       <TopBar />
 
       {/* Hero Section */}
-      <section className="relative px-6 py-20 lg:px-8 lg:py-32 bg-surface-alt">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative px-6 py-20 lg:px-8 lg:py-32 overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/TravelImage.png"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ zIndex: 1 }}
+          >
+            <source src="/TravelVideo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {/* Video overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" style={{ zIndex: 2 }}></div>
+        </div>
+        
+        {/* Content overlay */}
+        <div className="relative mx-auto max-w-7xl" style={{ zIndex: 10 }}>
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="text-center lg:text-left">
-              <h1 className="text-4xl lg:text-6xl font-black text-primary mb-8 leading-tight tracking-tight">
+              <h1 className="text-4xl lg:text-6xl font-black text-white mb-8 leading-tight tracking-tight drop-shadow-xl">
                 Join a global community of travelers to share itineraries, connect deeply, and track every step of your journey.
               </h1>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button onClick={() => scrollToSection('waitlist')} className="bg-brand/80 text-white hover:bg-brand px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
+                <button onClick={() => scrollToSection('waitlist')} className="bg-brand/90 text-white hover:bg-brand px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-xl backdrop-blur-sm border border-white/10">
                   Join the Waitlist
                 </button>
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
-              <div className="relative">
+              <div className="relative" style={{ zIndex: 10 }}>
                 {/* Phone Mockup */}
-                <div className="w-80 h-[600px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl">
+                <div className="w-80 h-[600px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl backdrop-blur-sm">
                   <div className="w-full h-full rounded-[2.5rem] overflow-hidden relative">
                     {/* Beautiful Coastal Background */}
                     <div 
