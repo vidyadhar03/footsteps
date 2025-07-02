@@ -115,115 +115,106 @@ function WaitlistForm() {
   };
 
   return (
-    <section id="waitlist" className="py-12 lg:py-18 bg-surface-alt">
-      <div className="mx-auto max-w-5xl px-6 lg:px-8">
+    <section id="waitlist" className="py-16 lg:py-24" style={{ backgroundColor: '#f7f9fb' }}>
+      <div className="mx-auto max-w-4xl px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8 lg:mb-10">
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-primary mb-4 lg:mb-6 tracking-tight">
+        <div className="text-center mb-12 lg:mb-16">
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-primary mb-6 lg:mb-8 tracking-tight">
             Join the Waitlist
           </h2>
-          <p className="text-xl lg:text-2xl text-subtle font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl lg:text-2xl text-subtle font-medium max-w-2xl mx-auto leading-relaxed">
             Be among the first to experience travel as identity, story, and connection
           </p>
         </div>
 
         {/* Form Container */}
         <div className="relative">
-          <div className="bg-white/80 backdrop-blur-xl p-8 lg:p-12 xl:p-16 rounded-[2rem] border border-white/40 relative overflow-hidden shadow-2xl shadow-brand/5"
-               style={{ minHeight: '560px' }}>
-            <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent pointer-events-none" />
-            <div className="relative">
+          <div className="bg-white/90 backdrop-blur-xl rounded-3xl border border-white/60 shadow-xl overflow-hidden">
+            <div className="relative p-6 sm:p-8 lg:p-12">
             
               {/* Step 1: Email */}
-              <div className={`absolute inset-0 p-5 lg:p-8 xl:p-10 transition-all duration-500 ${
-                step === 1 ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+              <div className={`transition-all duration-500 ${
+                step === 1 ? 'opacity-100 translate-x-0' : 'opacity-0 absolute inset-0 translate-x-full pointer-events-none'
               }`}>
-                <div className="h-full flex flex-col justify-between min-h-[480px]">
-                  {/* Top section with some spacing */}
-                  <div className="flex-shrink-0 pt-4 lg:pt-8">
-                    <div className="text-center">
-                      <h3 className="text-xl lg:text-3xl xl:text-4xl font-black text-primary mb-3 lg:mb-6 tracking-tight">
-                        Let&apos;s start with your email
-                      </h3>
-                      <p className="text-base lg:text-xl text-subtle font-medium px-2">We&apos;ll send you early access when Footsteps is ready</p>
+                <div className="text-center space-y-8 py-8 lg:py-12">
+                  <div className="space-y-4">
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-tight">
+                      Let's start with your email
+                    </h3>
+                    <p className="text-base sm:text-lg lg:text-xl text-subtle font-medium max-w-md mx-auto">
+                      We'll send you early access when Footsteps is ready
+                    </p>
+                  </div>
+                  
+                  <form onSubmit={(e) => { e.preventDefault(); handleEmailSubmit(); }} className="max-w-sm mx-auto space-y-6">
+                    <div>
+                      <input 
+                        type="email" 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email address"
+                        className="w-full px-6 py-4 lg:py-5 rounded-xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-gray-200 text-base lg:text-lg text-center bg-white shadow-sm focus:shadow-md transition-all duration-200"
+                        required
+                      />
                     </div>
-                  </div>
-                  
-                  {/* Middle section - form */}
-                  <div className="flex-1 flex flex-col justify-center py-8 lg:py-12">
-                    <form onSubmit={(e) => { e.preventDefault(); handleEmailSubmit(); }} className="max-w-md mx-auto w-full space-y-6 lg:space-y-8">
-                      <div className="relative">
-                        <input 
-                          type="email" 
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter your email address"
-                          className="w-full px-6 lg:px-8 py-4 lg:py-5 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-white/50 text-base lg:text-lg text-center bg-white/90 backdrop-blur-sm shadow-md focus:shadow-lg transition-all duration-200"
-                          required
-                        />
-                      </div>
-                      
-                      <div className="text-center pt-2 lg:pt-4">
-                        <button 
-                          type="submit"
-                          className="bg-brand/80 text-white px-10 lg:px-12 py-3 lg:py-4 rounded-2xl font-bold text-lg lg:text-xl hover:bg-brand transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-                        >
-                          Continue →
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  
-                  {/* Bottom section with padding */}
-                  <div className="flex-shrink-0 pb-4 lg:pb-8">
-                    {/* Optional: Add some bottom content or just spacing */}
-                  </div>
+                    
+                    <button 
+                      type="submit"
+                      className="w-full bg-brand text-white py-4 lg:py-5 rounded-xl font-bold text-lg lg:text-xl hover:bg-brand/90 transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
+                    >
+                      Continue →
+                    </button>
+                  </form>
                 </div>
               </div>
 
               {/* Step 2: Features */}
-              <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
-                step === 2 ? 'translate-x-0 opacity-100' : step < 2 ? 'translate-x-full opacity-0' : '-translate-x-full opacity-0'
+              <div className={`transition-all duration-500 ${
+                step === 2 ? 'opacity-100 translate-x-0' : step < 2 ? 'opacity-0 absolute inset-0 translate-x-full pointer-events-none' : 'opacity-0 absolute inset-0 -translate-x-full pointer-events-none'
               }`}>
-                <div className="h-full flex flex-col min-h-[520px]">
-                  <div className="text-center mb-4 lg:mb-6">
-                    <h3 className="text-xl lg:text-3xl xl:text-4xl font-black text-primary mb-2 lg:mb-4 tracking-tight">
+                <div className="space-y-8 py-6 lg:py-8">
+                  <div className="text-center space-y-4">
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-tight">
                       What matters most to your journey?
                     </h3>
-                    <p className="text-sm lg:text-xl text-subtle font-medium">Select the features that excite you. Your choices help shape the future of Footsteps.</p>
+                    <p className="text-sm sm:text-base lg:text-lg text-subtle font-medium max-w-2xl mx-auto">
+                      Select the features that excite you. Your choices help shape the future of Footsteps.
+                    </p>
                   </div>
                   
-                  {/* Scrollable feature list */}
-                  <div className="flex-1 overflow-y-auto mb-3 px-2" style={{ maxHeight: '280px' }}>
-                    <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto pb-2">
+                  <div className="max-h-80 overflow-y-auto px-2 -mx-2">
+                    <div className="grid gap-3 sm:gap-4">
                       {features.map((feature) => (
                         <div 
                           key={feature} 
-                          className={`flex items-center p-5 rounded-2xl cursor-pointer transition-all border ${
+                          className={`flex items-center p-4 lg:p-5 rounded-xl cursor-pointer transition-all border-2 ${
                             selectedFeatures.includes(feature)
-                              ? 'bg-white/95 border-brand shadow-md shadow-brand/10'
-                              : 'bg-white/70 border-white/50 hover:border-brand/60 hover:bg-white/85'
+                              ? 'bg-brand/5 border-brand text-primary shadow-md'
+                              : 'bg-white border-gray-200 hover:border-brand/40 hover:bg-brand/5 text-primary'
                           }`}
                           onClick={() => handleFeatureToggle(feature)}
                         >
-                          <input 
-                            type="checkbox" 
-                            checked={selectedFeatures.includes(feature)}
-                            onChange={() => {}}
-                            className="mr-4 w-5 h-5 text-brand rounded pointer-events-none"
-                            tabIndex={-1}
-                          />
-                          <span className="text-primary font-semibold text-lg">{feature}</span>
+                          <div className={`w-5 h-5 rounded border-2 mr-4 flex items-center justify-center transition-all ${
+                            selectedFeatures.includes(feature)
+                              ? 'bg-brand border-brand'
+                              : 'border-gray-300 bg-white'
+                          }`}>
+                            {selectedFeatures.includes(feature) && (
+                              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            )}
+                          </div>
+                          <span className="font-semibold text-base lg:text-lg">{feature}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                   
-                  {/* Fixed continue button at bottom */}
-                  <div className="flex-shrink-0 text-center pt-3 border-t border-white/50 bg-white/60 backdrop-blur-sm rounded-xl mx-2">
+                  <div className="text-center pt-4 border-t border-gray-200">
                     <button 
                       onClick={handleFeaturesSubmit}
-                      className="bg-brand/80 text-white px-12 py-4 rounded-2xl font-bold text-xl hover:bg-brand transition-all transform hover:scale-105 shadow-lg hover:shadow-xl w-full md:w-auto my-2"
+                      className="w-full sm:w-auto bg-brand text-white px-12 py-4 lg:py-5 rounded-xl font-bold text-lg lg:text-xl hover:bg-brand/90 transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
                     >
                       Continue →
                     </button>
@@ -232,57 +223,57 @@ function WaitlistForm() {
               </div>
 
               {/* Step 3: Comments */}
-              <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
-                step === 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+              <div className={`transition-all duration-500 ${
+                step === 3 ? 'opacity-100 translate-x-0' : 'opacity-0 absolute inset-0 translate-x-full pointer-events-none'
               }`}>
-                <div className="flex flex-col justify-between h-full min-h-[520px]">
-                  <div className="flex-1 flex flex-col justify-center">
-                    <div className="text-center mb-6">
-                      <h3 className="text-3xl lg:text-4xl font-black text-primary mb-4 tracking-tight">
-                        Any ideas or feedback?
-                      </h3>
-                      <p className="text-xl text-subtle font-medium">Help us build the perfect travel companion (optional)</p>
+                <div className="space-y-8 py-8 lg:py-12">
+                  <div className="text-center space-y-4">
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-tight">
+                      Any ideas or feedback?
+                    </h3>
+                    <p className="text-base sm:text-lg lg:text-xl text-subtle font-medium">
+                      Help us build the perfect travel companion (optional)
+                    </p>
+                  </div>
+                  
+                  <form onSubmit={(e) => { e.preventDefault(); handleFinalSubmit(); }} className="max-w-2xl mx-auto space-y-6">
+                    <div>
+                      <textarea 
+                        value={comments}
+                        onChange={(e) => setComments(e.target.value)}
+                        rows={6}
+                        placeholder="Share your travel ideas or what excites you about Footsteps..."
+                        className="w-full px-6 py-4 lg:py-5 rounded-xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-gray-200 text-base lg:text-lg resize-none bg-white shadow-sm focus:shadow-md transition-all duration-200"
+                      />
                     </div>
                     
-                    <form onSubmit={(e) => { e.preventDefault(); handleFinalSubmit(); }} className="max-w-2xl mx-auto w-full">
-                      <div className="relative">
-                        <textarea 
-                          value={comments}
-                          onChange={(e) => setComments(e.target.value)}
-                          rows={5}
-                          placeholder="Share your travel ideas or what excites you about Footsteps..."
-                          className="w-full px-8 py-6 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-white/50 text-lg resize-none bg-white/90 backdrop-blur-sm shadow-md focus:shadow-lg transition-all duration-200"
-                        />
-                      </div>
-                      
-                      <div className="text-center pt-4 space-y-3">
-                        <button 
-                          type="submit"
-                          disabled={isSubmitting}
-                          className={`px-16 py-5 rounded-2xl font-bold text-xl transition-all shadow-xl ${
-                            isSubmitting 
-                              ? 'bg-gray-400 cursor-not-allowed text-white' 
-                              : 'bg-brand/80 text-white hover:bg-brand transform hover:scale-105 hover:shadow-2xl'
-                          }`}
-                        >
-                          {isSubmitting ? (
-                            <>
-                              <svg className="animate-spin -ml-1 mr-3 h-6 w-6 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 714 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                              </svg>
-                              Joining...
-                            </>
-                          ) : (
-                            '🚀 Join Waitlist'
-                          )}
-                        </button>
-                        <p className="text-subtle text-lg font-medium">
-                          🎉 Over 1,000 travelers already joined!
-                        </p>
-                      </div>
-                    </form>
-                  </div>
+                    <div className="text-center space-y-4">
+                      <button 
+                        type="submit"
+                        disabled={isSubmitting}
+                        className={`w-full sm:w-auto px-12 lg:px-16 py-4 lg:py-5 rounded-xl font-bold text-lg lg:text-xl transition-all shadow-lg ${
+                          isSubmitting 
+                            ? 'bg-gray-400 cursor-not-allowed text-white' 
+                            : 'bg-brand text-white hover:bg-brand/90 transform hover:scale-[1.02] hover:shadow-xl'
+                        }`}
+                      >
+                        {isSubmitting ? (
+                          <div className="flex items-center justify-center">
+                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 714 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Joining...
+                          </div>
+                        ) : (
+                          '🚀 Join Waitlist'
+                        )}
+                      </button>
+                      <p className="text-subtle text-base lg:text-lg font-medium">
+                        🎉 Over 1,000 travelers already joined!
+                      </p>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -310,7 +301,7 @@ function TopBar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-surface-alt/95 backdrop-blur-sm border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-border/50" style={{ backgroundColor: 'rgba(247, 249, 251, 0.95)' }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -355,7 +346,7 @@ function TopBar() {
         {/* Mobile menu dropdown */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-surface-alt border-t border-border/50">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border/50" style={{ backgroundColor: '#f7f9fb' }}>
               <button 
                 onClick={() => {
                   scrollToSection('features');
@@ -420,13 +411,14 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-alt pt-16">
+    <div className="min-h-screen pt-16" style={{ backgroundColor: '#f7f9fb' }}>
       {/* Topbar */}
       <TopBar />
 
       {/* Hero Section */}
       <section className="relative px-6 py-12 lg:px-8 lg:py-20 overflow-hidden">
-        {/* Background Video */}
+        {/* Background Video - COMMENTED OUT */}
+        {/*
         <div className="absolute inset-0 w-full h-full">
           <video
             autoPlay
@@ -440,15 +432,15 @@ export default function Home() {
             <source src="/TravelVideo.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          {/* Video overlay for better text readability */}
           <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" style={{ zIndex: 2 }}></div>
         </div>
+        */}
         
         {/* Content overlay */}
         <div className="relative mx-auto max-w-7xl" style={{ zIndex: 10 }}>
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="text-center lg:text-left">
-              <h1 className="text-3xl lg:text-5xl xl:text-6xl font-black text-white mb-6 lg:mb-8 leading-tight tracking-tight drop-shadow-xl">
+              <h1 className="text-3xl lg:text-5xl xl:text-6xl font-black text-primary mb-6 lg:mb-8 leading-tight tracking-tight">
                 Footsteps turns your journeys into stories, your stories into tribes, and your path into a travel identity.
               </h1>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -459,94 +451,12 @@ export default function Home() {
             </div>
             <div className="flex justify-center lg:justify-end">
               <div className="relative" style={{ zIndex: 10 }}>
-                {/* Phone Mockup */}
-                <div className="w-72 lg:w-80 h-[540px] lg:h-[600px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl backdrop-blur-sm">
-                  <div className="w-full h-full rounded-[2.5rem] overflow-hidden relative">
-                    {/* Beautiful Coastal Background */}
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                      style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0%25' y1='0%25' x2='0%25' y2='70%25'%3E%3Cstop offset='0%25' style='stop-color:%23E0F2FE'/%3E%3Cstop offset='50%25' style='stop-color:%23BAE6FD'/%3E%3Cstop offset='100%25' style='stop-color:%2338BDF8'/%3E%3C/linearGradient%3E%3ClinearGradient id='water' x1='0%25' y1='70%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2338BDF8'/%3E%3Cstop offset='100%25' style='stop-color:%230EA5E9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='420' fill='url(%23sky)'/%3E%3Crect y='420' width='400' height='180' fill='url(%23water)'/%3E%3Cpath d='M0,280 Q80,200 160,240 T320,220 Q360,210 400,190 L400,420 L0,420 Z' fill='%23065F46' opacity='0.9'/%3E%3Cpath d='M0,320 Q100,250 200,280 T400,260 L400,420 L0,420 Z' fill='%23047857' opacity='0.7'/%3E%3Cpath d='M0,350 Q120,300 240,330 T400,310 L400,420 L0,420 Z' fill='%23059669' opacity='0.5'/%3E%3C/svg%3E")`
-                      }}
-                    >
-                      {/* Subtle overlay for text readability */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
-                    </div>
-
-                    {/* Status Bar */}
-                    <div className="absolute top-0 left-0 right-0 h-12 flex items-center justify-between px-6 text-white text-sm font-medium z-20">
-                      <span>9:41</span>
-                      <div className="flex items-center gap-1">
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                        <svg className="w-4 h-4 ml-2" fill="white" viewBox="0 0 24 24">
-                          <path d="M3 6l3 1.5L9 6l3 1.5L15 6l3 1.5L21 6v12l-3-1.5L15 18l-3-1.5L9 18l-3-1.5L3 18V6z"/>
-                        </svg>
-                      </div>
-                    </div>
-                    
-                    {/* App Header */}
-                    <div className="absolute top-16 left-0 right-0 text-center px-6 z-20">
-                      <h2 className="text-white text-2xl font-bold drop-shadow-lg">Footsteps</h2>
-                    </div>
-                    
-                    {/* User Stats Card */}
-                    <div className="absolute bottom-6 left-4 right-4 bg-white rounded-2xl p-5 shadow-xl z-20">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-blue-100">
-                          <div 
-                            className="w-full h-full bg-cover bg-center"
-                            style={{
-                              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='avatar' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2338BDF8'/%3E%3Cstop offset='100%25' style='stop-color:%230EA5E9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' fill='url(%23avatar)'/%3E%3Cpath d='M24,12 C28,10 32,12 32,18 C32,24 28,26 24,26 C20,26 16,24 16,18 C16,12 20,10 24,12 Z' fill='white' opacity='0.9'/%3E%3Cpath d='M10,38 C16,32 20,30 24,30 C28,30 32,32 38,38 L38,48 L10,48 Z' fill='white' opacity='0.9'/%3E%3C/svg%3E")`
-                            }}
-                          ></div>
-                        </div>
-                        <div>
-                          <div className="text-primary font-semibold text-lg">Emma Journey</div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex justify-between items-center mb-6">
-                        <div>
-                          <div className="text-3xl font-bold text-primary">758 <span className="text-lg text-brand">km</span></div>
-                          <div className="text-subtle text-sm">Tracked</div>
-                        </div>
-                        <div>
-                          <div className="text-3xl font-bold text-primary">5</div>
-                          <div className="text-subtle text-sm">Connected</div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex justify-around pt-4 border-t border-gray-100">
-                        <button className="flex flex-col items-center py-2 px-3">
-                          <div className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center mb-2">
-                            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                            </svg>
-                          </div>
-                          <span className="text-xs text-brand font-medium">Contract</span>
-                        </button>
-                        <button className="flex flex-col items-center py-2 px-3">
-                          <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mb-2">
-                            <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                          </div>
-                          <span className="text-xs text-gray-500 font-medium">Three</span>
-                        </button>
-                        <button className="flex flex-col items-center py-2 px-3">
-                          <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mb-2">
-                            <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5Z"/>
-                            </svg>
-                          </div>
-                          <span className="text-xs text-gray-500 font-medium">Visiting</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {/* Mobile Screen Image */}
+                <img 
+                  src="/mobileScreen.jpeg"
+                  alt="Footsteps Mobile App Screen"
+                  className="w-72 lg:w-80 h-auto rounded-[3rem]"
+                />
               </div>
             </div>
           </div>
@@ -554,7 +464,7 @@ export default function Home() {
       </section>
 
       {/* Why Footsteps Section */}
-      <section id="features" className="py-12 lg:py-20 bg-surface-alt">
+      <section id="features" className="py-12 lg:py-20" style={{ backgroundColor: '#f7f9fb' }}>
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div ref={headerRef} className="text-center mb-12 lg:mb-16">
             <h2 className={`text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight transition-all duration-800 ${
@@ -698,7 +608,7 @@ export default function Home() {
       <WaitlistForm />
 
       {/* Demo Section */}
-      <section id="demo" className="py-12 lg:py-20 bg-surface-alt">
+      <section id="demo" className="py-12 lg:py-20" style={{ backgroundColor: '#f7f9fb' }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-10 lg:mb-14">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-4 lg:mb-6 tracking-tight">
@@ -731,7 +641,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-surface-alt border-t border-border py-8 lg:py-12">
+      <footer className="border-t border-border py-8 lg:py-12" style={{ backgroundColor: '#f7f9fb' }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <h3 className="text-xl lg:text-2xl font-black text-primary mb-3 lg:mb-4 tracking-tight">Footsteps</h3>
