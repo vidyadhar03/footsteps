@@ -123,7 +123,7 @@ function WaitlistForm() {
         {/* Form Container */}
         <div className="relative">
           <div className="bg-white/80 backdrop-blur-xl p-10 lg:p-16 rounded-[2rem] border border-white/40 relative overflow-hidden shadow-2xl shadow-brand/5"
-               style={{ minHeight: '520px' }}>
+               style={{ minHeight: '600px' }}>
             <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent pointer-events-none" />
             <div className="relative">
             
@@ -131,7 +131,7 @@ function WaitlistForm() {
               <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
                 step === 1 ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
               }`}>
-                <div className="flex flex-col justify-between h-full min-h-[440px]">
+                <div className="flex flex-col justify-between h-full min-h-[520px]">
                   <div className="flex-1 flex flex-col justify-center">
                     <div className="text-center mb-12">
                       <h3 className="text-3xl lg:text-4xl font-black text-primary mb-6 tracking-tight">
@@ -147,7 +147,7 @@ function WaitlistForm() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email address"
-                          className="w-full px-8 py-5 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-border/50 text-lg text-center bg-white/80 backdrop-blur-sm shadow-sm focus:shadow-md transition-all duration-200"
+                          className="w-full px-8 py-5 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-white/50 text-lg text-center bg-white/90 backdrop-blur-sm shadow-md focus:shadow-lg transition-all duration-200"
                           required
                         />
                       </div>
@@ -169,24 +169,24 @@ function WaitlistForm() {
               <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
                 step === 2 ? 'translate-x-0 opacity-100' : step < 2 ? 'translate-x-full opacity-0' : '-translate-x-full opacity-0'
               }`}>
-                <div className="h-full flex flex-col min-h-[440px]">
-                  <div className="text-center mb-8">
-                    <h3 className="text-3xl lg:text-4xl font-black text-primary mb-6 tracking-tight">
+                <div className="h-full flex flex-col min-h-[520px]">
+                  <div className="text-center mb-6">
+                    <h3 className="text-3xl lg:text-4xl font-black text-primary mb-4 tracking-tight">
                       What features excite you most?
                     </h3>
                     <p className="text-xl text-subtle font-medium">Select all that interest you (optional)</p>
                   </div>
                   
                   {/* Scrollable feature list */}
-                  <div className="flex-1 overflow-y-auto mb-6 px-2">
-                    <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+                  <div className="flex-1 overflow-y-auto mb-3 px-2" style={{ maxHeight: '280px' }}>
+                    <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto pb-2">
                       {features.map((feature) => (
                         <div 
                           key={feature} 
-                          className={`flex items-center p-6 rounded-2xl cursor-pointer transition-all border ${
+                          className={`flex items-center p-5 rounded-2xl cursor-pointer transition-all border ${
                             selectedFeatures.includes(feature)
-                              ? 'bg-white/90 border-brand shadow-md shadow-brand/10'
-                              : 'bg-white/60 border-border/50 hover:border-brand/60 hover:bg-white/80'
+                              ? 'bg-white/95 border-brand shadow-md shadow-brand/10'
+                              : 'bg-white/70 border-white/50 hover:border-brand/60 hover:bg-white/85'
                           }`}
                           onClick={() => handleFeatureToggle(feature)}
                         >
@@ -194,7 +194,7 @@ function WaitlistForm() {
                             type="checkbox" 
                             checked={selectedFeatures.includes(feature)}
                             onChange={() => {}}
-                            className="mr-5 w-5 h-5 text-brand rounded pointer-events-none"
+                            className="mr-4 w-5 h-5 text-brand rounded pointer-events-none"
                             tabIndex={-1}
                           />
                           <span className="text-primary font-semibold text-lg">{feature}</span>
@@ -204,10 +204,10 @@ function WaitlistForm() {
                   </div>
                   
                   {/* Fixed continue button at bottom */}
-                  <div className="text-center pt-6 border-t border-border/30">
+                  <div className="flex-shrink-0 text-center pt-3 border-t border-white/50 bg-white/60 backdrop-blur-sm rounded-xl mx-2">
                     <button 
                       onClick={handleFeaturesSubmit}
-                      className="bg-brand/80 text-white px-12 py-4 rounded-2xl font-bold text-xl hover:bg-brand transition-all transform hover:scale-105 shadow-lg hover:shadow-xl w-full md:w-auto"
+                      className="bg-brand/80 text-white px-12 py-4 rounded-2xl font-bold text-xl hover:bg-brand transition-all transform hover:scale-105 shadow-lg hover:shadow-xl w-full md:w-auto my-2"
                     >
                       Continue →
                     </button>
@@ -219,10 +219,10 @@ function WaitlistForm() {
               <div className={`absolute inset-0 p-6 lg:p-10 transition-all duration-500 ${
                 step === 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
               }`}>
-                <div className="flex flex-col justify-between h-full min-h-[440px]">
+                <div className="flex flex-col justify-between h-full min-h-[520px]">
                   <div className="flex-1 flex flex-col justify-center">
-                    <div className="text-center mb-8">
-                      <h3 className="text-3xl lg:text-4xl font-black text-primary mb-6 tracking-tight">
+                    <div className="text-center mb-6">
+                      <h3 className="text-3xl lg:text-4xl font-black text-primary mb-4 tracking-tight">
                         Any ideas or feedback?
                       </h3>
                       <p className="text-xl text-subtle font-medium">Help us build the perfect travel companion (optional)</p>
@@ -233,13 +233,13 @@ function WaitlistForm() {
                         <textarea 
                           value={comments}
                           onChange={(e) => setComments(e.target.value)}
-                          rows={6}
+                          rows={5}
                           placeholder="Share your travel ideas or what excites you about Footsteps..."
-                          className="w-full px-8 py-6 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-border/50 text-lg resize-none bg-white/80 backdrop-blur-sm shadow-sm focus:shadow-md transition-all duration-200"
+                          className="w-full px-8 py-6 rounded-2xl text-primary placeholder-subtle focus:outline-none focus:ring-2 focus:ring-brand/50 border border-white/50 text-lg resize-none bg-white/90 backdrop-blur-sm shadow-md focus:shadow-lg transition-all duration-200"
                         />
                       </div>
                       
-                      <div className="text-center pt-6 space-y-4">
+                      <div className="text-center pt-4 space-y-3">
                         <button 
                           type="submit"
                           disabled={isSubmitting}
@@ -529,56 +529,68 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Interactive Maps */}
-            <div className="text-center p-8 rounded-2xl bg-surface-alt hover:bg-surface-alt shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand/5 to-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+            <div className="text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+                  <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Interactive Maps</h3>
+                <p className="text-subtle leading-relaxed font-medium">
+                  Explore interactive map insights and discover new destinations.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Interactive Maps</h3>
-              <p className="text-subtle leading-relaxed font-medium">
-                Explore interactive map insights and discover new destinations.
-              </p>
             </div>
 
             {/* Friend Visits */}
-            <div className="text-center p-8 rounded-2xl bg-surface-alt hover:bg-surface-alt shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand/5 to-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                </svg>
+            <div className="text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+                  <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Friend Visits</h3>
+                <p className="text-subtle leading-relaxed font-medium">
+                  Connect with fellow travelers and see where they&apos;ve been.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Friend Visits</h3>
-              <p className="text-subtle leading-relaxed font-medium">
-                Connect with fellow travelers and see where they&apos;ve been.
-              </p>
             </div>
 
             {/* Itinerary Guides */}
-            <div className="text-center p-8 rounded-2xl bg-surface-alt hover:bg-surface-alt shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand/5 to-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
+            <div className="text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+                  <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Itinerary Guides</h3>
+                <p className="text-subtle leading-relaxed font-medium">
+                  Access detailed itineraries and curated travel guides.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Itinerary Guides</h3>
-              <p className="text-subtle leading-relaxed font-medium">
-                Access detailed itineraries and curated travel guides.
-              </p>
             </div>
 
             {/* Tribe Updates */}
-            <div className="text-center p-8 rounded-2xl bg-surface-alt hover:bg-surface-alt shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand/5 to-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
+            <div className="text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+                  <svg className="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Tribe Updates</h3>
+                <p className="text-subtle leading-relaxed font-medium">
+                  Keep up with insights and updates from your travel community.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-primary mb-3 tracking-tight">Tribe Updates</h3>
-              <p className="text-subtle leading-relaxed font-medium">
-                Keep up with insights and updates from your travel community.
-              </p>
             </div>
           </div>
         </div>
@@ -599,19 +611,22 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="bg-surface-alt rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto border border-border">
-            <div className="aspect-video bg-surface-alt flex items-center justify-center">
-              <button className="bg-white bg-opacity-90 backdrop-blur-sm p-6 rounded-full hover:bg-opacity-100 transition-all transform hover:scale-110 shadow-lg">
-                <svg className="w-12 h-12 text-brand" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </button>
-            </div>
-            <div className="p-8">
-              <h3 className="text-2xl font-black text-primary mb-4 tracking-tight">Interactive Demo</h3>
-              <p className="text-subtle font-medium">
-                Explore hidden gems, connect with fellow travelers, and plan your next adventure with our intuitive mobile app.
-              </p>
+          <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto border border-white/50 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="aspect-video bg-gradient-to-br from-white/50 to-white/30 flex items-center justify-center">
+                <button className="bg-white/95 backdrop-blur-sm p-6 rounded-full hover:bg-white transition-all transform hover:scale-110 shadow-xl hover:shadow-2xl">
+                  <svg className="w-12 h-12 text-brand" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
+              <div className="p-8 bg-white/80 backdrop-blur-sm">
+                <h3 className="text-2xl font-black text-primary mb-4 tracking-tight">Interactive Demo</h3>
+                <p className="text-subtle font-medium">
+                  Explore hidden gems, connect with fellow travelers, and plan your next adventure with our intuitive mobile app.
+                </p>
+              </div>
             </div>
           </div>
         </div>
