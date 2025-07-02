@@ -518,14 +518,14 @@ export default function Home() {
 
           <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Your Travel Identity */}
-            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
-              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.1s_forwards]' : 'opacity-0 translate-y-8'
-            }`}>
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-700 ease-out border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: cardsInView ? '100ms' : '0ms' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
-                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_0.5s_forwards]' : 'opacity-0'
-                }`}>
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md transition-all duration-500 ease-out ${
+                  cardsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`} style={{ transitionDelay: cardsInView ? '300ms' : '0ms' }}>
                   <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
@@ -538,14 +538,14 @@ export default function Home() {
             </div>
 
             {/* Footsteps Map */}
-            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
-              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.3s_forwards]' : 'opacity-0 translate-y-8'
-            }`}>
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-700 ease-out border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: cardsInView ? '200ms' : '0ms' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
-                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_0.7s_forwards]' : 'opacity-0'
-                }`}>
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md transition-all duration-500 ease-out ${
+                  cardsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`} style={{ transitionDelay: cardsInView ? '400ms' : '0ms' }}>
                   <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -559,14 +559,14 @@ export default function Home() {
             </div>
 
             {/* Journey Stories */}
-            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
-              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.5s_forwards]' : 'opacity-0 translate-y-8'
-            }`}>
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-700 ease-out border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: cardsInView ? '300ms' : '0ms' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
-                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_0.9s_forwards]' : 'opacity-0'
-                }`}>
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md transition-all duration-500 ease-out ${
+                  cardsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`} style={{ transitionDelay: cardsInView ? '500ms' : '0ms' }}>
                   <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
@@ -579,14 +579,14 @@ export default function Home() {
             </div>
 
             {/* Tribe Circles */}
-            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
-              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.7s_forwards]' : 'opacity-0 translate-y-8'
-            }`}>
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-700 ease-out border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: cardsInView ? '100ms' : '0ms' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
-                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_1.1s_forwards]' : 'opacity-0'
-                }`}>
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md transition-all duration-500 ease-out ${
+                  cardsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`} style={{ transitionDelay: cardsInView ? '300ms' : '0ms' }}>
                   <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                   </svg>
@@ -599,14 +599,14 @@ export default function Home() {
             </div>
 
             {/* Lived Journeys */}
-            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
-              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_0.9s_forwards]' : 'opacity-0 translate-y-8'
-            }`}>
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-700 ease-out border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: cardsInView ? '200ms' : '0ms' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
-                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_1.3s_forwards]' : 'opacity-0'
-                }`}>
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md transition-all duration-500 ease-out ${
+                  cardsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`} style={{ transitionDelay: cardsInView ? '400ms' : '0ms' }}>
                   <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
@@ -619,14 +619,14 @@ export default function Home() {
             </div>
 
             {/* Real Connections */}
-            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative overflow-hidden ${
-              cardsInView ? 'opacity-100 translate-y-0 animate-[slideInUp_0.8s_ease-out_1.1s_forwards]' : 'opacity-0 translate-y-8'
-            }`}>
+            <div className={`text-center p-6 lg:p-8 rounded-2xl bg-white/90 backdrop-blur-sm hover:bg-white/95 shadow-lg hover:shadow-xl transition-all duration-700 ease-out border border-white/50 relative overflow-hidden ${
+              cardsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ transitionDelay: cardsInView ? '300ms' : '0ms' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
               <div className="relative">
-                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md ${
-                  cardsInView ? 'opacity-100 animate-[iconBounce_0.6s_ease-out_1.5s_forwards]' : 'opacity-0'
-                }`}>
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-brand/10 to-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-md transition-all duration-500 ease-out ${
+                  cardsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`} style={{ transitionDelay: cardsInView ? '500ms' : '0ms' }}>
                   <svg className="w-7 h-7 lg:w-8 lg:h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                   </svg>
