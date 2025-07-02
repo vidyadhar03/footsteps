@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Footsteps",
   description: "The Strava for travelers.",
+  icons: {
+    icon: "/mainIcon.png",
+    shortcut: "/mainIcon.png",
+    apple: "/mainIcon.png",
+  },
 };
 
 export default function RootLayout({

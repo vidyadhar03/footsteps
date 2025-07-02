@@ -333,7 +333,16 @@ function TopBar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 flex items-center space-x-3">
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md overflow-hidden">
+                <Image 
+                  src="/mainIcon.png"
+                  alt="Footsteps Icon"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 object-cover"
+                />
+              </div>
               <h1 className="text-2xl font-black text-primary tracking-tight">
                 Footsteps
               </h1>
