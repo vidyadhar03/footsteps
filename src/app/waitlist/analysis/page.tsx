@@ -26,7 +26,13 @@ interface AnalyticsData {
     date: string
     count: number
   }[]
-  rawData: any[]
+  rawData: {
+    id: string
+    email: string
+    suggested_feature: string[] | null
+    comments: string | null
+    created_at: string
+  }[]
 }
 
 export default function WaitlistAnalysis() {
@@ -216,7 +222,7 @@ export default function WaitlistAnalysis() {
               </div>
               <div className="p-6">
                 <div className="space-y-4">
-                  {data.features.map((feature, index) => (
+                  {data.features.map((feature) => (
                     <div key={feature.feature} className="relative">
                       <div 
                         className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors"
@@ -300,7 +306,7 @@ export default function WaitlistAnalysis() {
                           )}
                         </div>
                         <div className="bg-gray-50 rounded p-3">
-                          <p className="text-gray-700 italic">"{comment.comment}"</p>
+                          <p className="text-gray-700 italic">&ldquo;{comment.comment}&rdquo;</p>
                         </div>
                       </div>
                     ))}
