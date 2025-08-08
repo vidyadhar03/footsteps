@@ -44,7 +44,7 @@ export default function PrivacyPage() {
       <li><strong>Email (general queries):</strong> <a href="mailto:footsteps.space@gmail.com">footsteps.space@gmail.com</a></li>
       <li><strong>Grievance Officer (required under DPDP Act – Digital Personal Data Protection Act, 2023):</strong><br/>
         Name: Vivek Mankonda<br/>
-        Email: <a href="mailto:footsteps.privacy@gmail.com">footsteps.privacy@gmail.com</a><br/>
+        Email: <a href="mailto:footsteps.space@gmail.com">footsteps.space@gmail.com</a><br/>
         Response Time: Within 30 days of receipt of your complaint
       </li>
     </ul>
@@ -140,7 +140,7 @@ export default function PrivacyPage() {
 
     <h2 id="deletion-process">13) Account &amp; Data Deletion</h2>
     <ul>
-      <li>You can request deletion from in‑app settings or via <a href="mailto:footsteps.privacy@gmail.com">footsteps.privacy@gmail.com</a>.</li>
+      <li>You can request deletion from in‑app settings or via <a href="mailto:footsteps.space@gmail.com">footsteps.space@gmail.com</a>.</li>
       <li>We generally complete deletion requests within <strong>30 days</strong>. Backup retention (up to 90 days) may delay full purge from all systems.</li>
       <li>Some records may be retained where required by law (for example, fraud prevention or compliance).</li>
     </ul>
@@ -156,7 +156,7 @@ export default function PrivacyPage() {
 
     <div class="hr"></div>
 
-    <p class="small muted">If you have questions about this Privacy Policy, contact: <a href="mailto:footsteps.space@gmail.com">footsteps.space@gmail.com</a> or the Grievance Officer at <a href="mailto:footsteps.privacy@gmail.com">footsteps.privacy@gmail.com</a>.</p>
+    <p class="small muted">If you have questions about this Privacy Policy, contact: <a href="mailto:footsteps.space@gmail.com">footsteps.space@gmail.com</a> or the Grievance Officer at <a href="mailto:footsteps.space@gmail.com">footsteps.space@gmail.com</a>.</p>
   </main>
   `
 

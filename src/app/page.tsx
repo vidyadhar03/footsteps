@@ -922,7 +922,7 @@ export default function Home() {
             <h3 className="text-xl lg:text-2xl font-black text-primary mb-3 lg:mb-4 tracking-tight">Footsteps</h3>
             <div className="flex justify-center space-x-4 lg:space-x-6">
               <a href="/privacy" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
-              <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Terms</a>
+              <a href="/terms" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Terms</a>
               <a href="#support" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Contact</a>
             </div>
             <p className="text-subtle text-xs lg:text-sm mt-6 lg:mt-8 opacity-70">© 2025 Footsteps. All rights reserved.</p>
