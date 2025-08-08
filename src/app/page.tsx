@@ -457,7 +457,8 @@ function SupportSection() {
       } else {
         setAlert({ type: 'error', text: data?.message || 'Failed to send message.' })
       }
-    } catch (err) {
+    } catch (error) {
+      console.error(error)
       setAlert({ type: 'error', text: 'Something went wrong. Please try again.' })
     } finally {
       setSubmitting(false)
@@ -527,7 +528,9 @@ function SupportSection() {
                 <select
                   id="category"
                   value={category}
-                  onChange={(e) => setCategory(e.target.value as any)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    setCategory(e.target.value as 'bug' | 'feedback' | 'account' | 'other')
+                  }
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand/50"
                 >
                   <option value="bug">Bug</option>
