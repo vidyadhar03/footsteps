@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Footsteps Landing Page
 
-## Getting Started
+**Footsteps** is a travel storytelling platform where journeys become stories — and those stories shape your travel identity.
 
-First, run the development server:
+This repository contains the public **landing page** for the Footsteps mobile app. Built with **Next.js**, **Tailwind CSS**, and integrated with **Supabase**, it captures early access sign-ups and support messages from users. It’s minimal, fast, and designed to evolve with the product.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌍 What is Footsteps?
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Footsteps is like **Strava for travelers**.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Pin travel moments on a map
+- Add story fragments (what, when, where, why, how)
+- Build a personal **travel identity**
+- Discover journeys from other travelers
+- Join a community built around authentic travel stories
 
-## Learn More
+This landing page communicates our vision, gathers early adopters, and offers support.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧩 Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Layer | Tech |
+|-----------|-----------------|
+| Framework | Next.js, React |
+| Styling | Tailwind CSS |
+| Backend | Supabase |
+| Deploy | Vercel (or any static host) |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- ✅ Hero section with pitch and call to action
+- ✅ **Early access sign-up form** (stored in Supabase `waitlist`)
+- ✅ **Support form** for user feedback (stored in Supabase `support_messages`)
+- ✅ Mobile-friendly, modern UI
+- ✅ Privacy-first communication (no tracking, no analytics)
+- ✅ Clean, extensible code structure
+
+---

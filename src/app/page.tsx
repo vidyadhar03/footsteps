@@ -417,6 +417,192 @@ function TopBar() {
   );
 }
 
+function SupportSection() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [category, setCategory] = useState<'bug' | 'feedback' | 'account' | 'other'>('feedback')
+  const [message, setMessage] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [alert, setAlert] = useState<{ type: 'success' | 'error' | null; text: string }>({ type: null, text: '' })
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setAlert({ type: null, text: '' })
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/support', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, category, message })
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setAlert({ type: 'success', text: 'Thanks! Your message was sent.' })
+        setName('')
+        setEmail('')
+        setCategory('feedback')
+        setMessage('')
+      } else {
+        setAlert({ type: 'error', text: data?.message || 'Failed to send message.' })
+      }
+    } catch (err) {
+      setAlert({ type: 'error', text: 'Something went wrong. Please try again.' })
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  return (
+    <section id="support" className="py-16 lg:py-24" style={{ backgroundColor: '#F6F6F6' }}>
+      <div className="mx-auto max-w-5xl px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl lg:text-4xl font-black text-primary mb-3 tracking-tight">Support</h2>
+          <p className="text-subtle text-base lg:text-lg">We typically reply within 24–48 hours.</p>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Contact methods */}
+          <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-white/60 shadow p-6">
+            <h3 className="text-xl font-bold text-primary mb-3">Email</h3>
+            <p className="text-subtle mb-4">Prefer email? Write to us anytime.</p>
+            <a
+              href="mailto:footsteps.space@gmail.com"
+              className="inline-flex items-center gap-2 text-white bg-brand px-5 py-3 rounded-lg font-semibold hover:bg-brand/90"
+            >
+              footsteps.space@gmail.com
+            </a>
+
+            <div className="mt-6 pt-6 border-t">
+              <h4 className="font-semibold text-primary mb-2">Data deletion</h4>
+              <p className="text-subtle text-sm">
+                To request deletion of your data, email us at
+                {' '}<a className="text-brand font-medium" href="mailto:footsteps.space@gmail.com">footsteps.space@gmail.com</a>.
+              </p>
+            </div>
+          </div>
+
+          {/* Form */}
+          <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-white/60 shadow p-6">
+            <h3 className="text-xl font-bold text-primary mb-4">Send us a message</h3>
+            <form onSubmit={onSubmit} className="space-y-4" aria-labelledby="support-form">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-primary mb-1">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  maxLength={120}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand/50"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-primary mb-1">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand/50"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="category" className="block text-sm font-medium text-primary mb-1">Category</label>
+                <select
+                  id="category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value as any)}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand/50"
+                >
+                  <option value="bug">Bug</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="account">Account</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-primary mb-1">Message</label>
+                <textarea
+                  id="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                  rows={6}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand/50"
+                  placeholder="How can we help?"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className={`w-full sm:w-auto px-8 py-3 rounded-lg font-semibold text-white shadow ${submitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-brand hover:bg-brand/90'}`}
+              >
+                {submitting ? 'Sending…' : 'Send message'}
+              </button>
+
+              {alert.type && (
+                <div
+                  role="status"
+                  className={`mt-3 p-3 rounded-lg border-2 ${alert.type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'}`}
+                >
+                  {alert.text}
+                </div>
+              )}
+            </form>
+            <p className="mt-4 text-xs text-subtle">We typically reply within 24–48 hours.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function FAQSection() {
+  const faqs = [
+    {
+      q: 'What is Footsteps?',
+      a: "Footsteps is a travel app where your journeys become stories. Pin moments on an interactive map, connect them into journeys, and explore authentic travel experiences from people around the world.",
+    },
+    {
+      q: 'Is Footsteps a community app?',
+      a: "Right now, you can explore other travelers’ stories on the map — a light-form community that inspires connection. As more explorers join, we’ll roll out deeper community features like groups and tribes.",
+    },
+    { q: 'Which devices does Footsteps work on?', a: 'Footsteps is available on Android 11+ and iOS 16+ devices.' },
+    { q: 'Is Footsteps free to use?', a: 'Yes. The first version is completely free. We may add optional premium features in the future.' },
+    { q: 'Who is Footsteps for?', a: 'Whether you travel every month or once in a while, Footsteps helps you capture, revisit, and share your experiences in a way that’s personal and easy.' },
+    { q: 'How do I join the early access program?', a: 'Enter your email in the sign-up form on this page. We send new invites with each app update, so you’ll get access in an upcoming release. Right now we have around 50 testers, and we’re steadily adding more.' },
+    { q: 'Can I keep my stories private?', a: 'Yes. You decide whether to keep your stories for yourself or share them for others to explore.' },
+    { q: 'Do I need to be a professional writer or photographer?', a: 'Not at all. Footsteps is designed to make storytelling effortless — just add your moments, and we’ll handle the structure.' },
+    { q: 'Will my location be tracked all the time?', a: 'No. We only use your location when you choose to attach it to a story.' },
+    { q: 'Can I edit or delete my stories later?', a: 'Yes. You’re in full control of your content — you can edit or remove any story you’ve posted.' },
+    { q: 'How can I give feedback or report a bug?', a: 'Use the support form on this page, email us at footsteps.space@gmail.com, or send us a DM on Instagram at @footsteps.space.' },
+  ]
+
+  return (
+    <section id="faq" className="py-16 lg:py-24" style={{ backgroundColor: '#F6F6F6' }}>
+      <div className="mx-auto max-w-5xl px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl lg:text-4xl font-black text-primary mb-3 tracking-tight">Frequently Asked Questions</h2>
+        </div>
+        <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-white/60 shadow divide-y">
+          {faqs.map((item, idx) => (
+            <div key={idx} className="p-6">
+              <h3 className="text-lg font-semibold text-primary mb-2">{item.q}</h3>
+              <p className="text-subtle">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function Home() {
   const [headerRef, headerInView] = useIntersectionObserver({ threshold: 0.3 });
   const [cardsRef, cardsInView] = useIntersectionObserver({ threshold: 0.2 });
@@ -644,6 +830,12 @@ export default function Home() {
       {/* Waitlist Section */}
       <WaitlistForm />
 
+      {/* Support Section */}
+      <SupportSection />
+
+      {/* FAQ Section */}
+      <FAQSection />
+
       {/* Demo Section */}
       {/* <section id="demo" className="py-12 lg:py-20" style={{ backgroundColor: '#F6F6F6' }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -685,7 +877,7 @@ export default function Home() {
             <div className="flex justify-center space-x-4 lg:space-x-6">
               <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
               <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Terms</a>
-              <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Contact</a>
+              <a href="#support" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Contact</a>
             </div>
             <p className="text-subtle text-xs lg:text-sm mt-6 lg:mt-8 opacity-70">© 2025 Footsteps. All rights reserved.</p>
           </div>

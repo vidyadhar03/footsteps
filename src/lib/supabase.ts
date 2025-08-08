@@ -32,4 +32,33 @@ export async function insertWaitlistData(data: WaitlistData) {
   }
 }
 
+// Type definition for support message data
+export interface SupportMessageInput {
+  name: string
+  email: string
+  category: 'bug' | 'feedback' | 'account' | 'other'
+  message: string
+  user_agent?: string | null
+  page_url?: string | null
+}
+
+// Function to insert support message
+export async function insertSupportMessage(data: SupportMessageInput) {
+  try {
+    const { data: result, error } = await supabase
+      .from('support_messages')
+      .insert([data])
+      .select()
+
+    if (error) {
+      throw new Error(`Database error: ${error.message}`)
+    }
+
+    return result
+  } catch (error) {
+    console.error('Failed to insert support message:', error)
+    throw error
+  }
+}
+
  
