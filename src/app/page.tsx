@@ -921,7 +921,7 @@ export default function Home() {
           <div className="text-center">
             <h3 className="text-xl lg:text-2xl font-black text-primary mb-3 lg:mb-4 tracking-tight">Footsteps</h3>
             <div className="flex justify-center space-x-4 lg:space-x-6">
-              <a href="https://www.termsfeed.com/live/aa40d6ce-aecf-4f70-82b1-780e0e443e5e" target="_blank" rel="noopener noreferrer" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
+              <a href="/privacy" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
               <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Terms</a>
               <a href="#support" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Contact</a>
             </div>
