@@ -354,10 +354,13 @@ function TopBar() {
             <button onClick={() => scrollToSection('features')} className="text-primary hover:text-brand transition-colors duration-200 font-medium">
               Features
             </button>
-            <button onClick={() => scrollToSection('waitlist')} className="text-primary hover:text-brand transition-colors duration-200 font-medium">
-              Waitlist
+            <button onClick={() => scrollToSection('support')} className="text-primary hover:text-brand transition-colors duration-200 font-medium">
+              Support
             </button>
-            {/* CTA Button */}
+            <button onClick={() => scrollToSection('faq')} className="text-primary hover:text-brand transition-colors duration-200 font-medium">
+              FAQ
+            </button>
+            {/* CTA Button (single Waitlist entry kept) */}
             <button onClick={() => scrollToSection('waitlist')} className="bg-brand/80 hover:bg-brand text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-sm hover:shadow-md">
               Join Waitlist
             </button>
@@ -391,12 +394,21 @@ function TopBar() {
               </button>
               <button 
                 onClick={() => {
-                  scrollToSection('waitlist');
+                  scrollToSection('support');
                   setIsMobileMenuOpen(false);
                 }}
                 className="block w-full text-left px-3 py-2 text-primary hover:text-brand transition-colors duration-200 font-medium"
               >
-                Waitlist
+                Support
+              </button>
+              <button 
+                onClick={() => {
+                  scrollToSection('faq');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-primary hover:text-brand transition-colors duration-200 font-medium"
+              >
+                FAQ
               </button>
               <div className="pt-2">
                 <button 
@@ -564,6 +576,16 @@ function SupportSection() {
 }
 
 function FAQSection() {
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set())
+  const toggleItem = (index: number) => {
+    setOpenItems(prev => {
+      const next = new Set(prev)
+      if (next.has(index)) next.delete(index)
+      else next.add(index)
+      return next
+    })
+  }
+
   const faqs = [
     {
       q: 'What is Footsteps?',
@@ -590,13 +612,34 @@ function FAQSection() {
         <div className="text-center mb-10">
           <h2 className="text-3xl lg:text-4xl font-black text-primary mb-3 tracking-tight">Frequently Asked Questions</h2>
         </div>
-        <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-white/60 shadow divide-y">
-          {faqs.map((item, idx) => (
-            <div key={idx} className="p-6">
-              <h3 className="text-lg font-semibold text-primary mb-2">{item.q}</h3>
-              <p className="text-subtle">{item.a}</p>
-            </div>
-          ))}
+        <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-white/60 shadow divide-y divide-black/10" role="list">
+          {faqs.map((item, idx) => {
+            const isOpen = openItems.has(idx)
+            return (
+              <div key={idx} className="p-0" role="listitem">
+                <button
+                  onClick={() => toggleItem(idx)}
+                  aria-expanded={isOpen}
+                  className="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none"
+                >
+                  <span className="text-lg font-semibold text-primary pr-6">{item.q}</span>
+                  <svg
+                    className={`w-5 h-5 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {isOpen && (
+                  <div className="px-6 pb-6 pt-0">
+                    <p className="text-subtle">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
@@ -875,7 +918,7 @@ export default function Home() {
           <div className="text-center">
             <h3 className="text-xl lg:text-2xl font-black text-primary mb-3 lg:mb-4 tracking-tight">Footsteps</h3>
             <div className="flex justify-center space-x-4 lg:space-x-6">
-              <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
+              <a href="https://www.termsfeed.com/live/aa40d6ce-aecf-4f70-82b1-780e0e443e5e" target="_blank" rel="noopener noreferrer" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Privacy</a>
               <a href="#" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Terms</a>
               <a href="#support" className="text-sm lg:text-base text-subtle hover:text-brand transition-colors font-medium">Contact</a>
             </div>
