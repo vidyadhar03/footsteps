@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.footsteps.app",
+      "sha256_cert_fingerprints": [
+        "52:03:2B:B6:73:C6:A5:4D:BD:54:98:23:E0:E3:2F:74:CD:3F:70:6E:FF:5B:74:CC:9D:32:C4:6C:E0:A3:47:6B"
+      ]
+    }
+  }
+]
+

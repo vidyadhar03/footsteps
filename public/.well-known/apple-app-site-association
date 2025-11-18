@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "W5Q2T4885G.io.footsteps.app",
+        "paths": [
+          "/story/*",
+          "/journey/*",
+          "/user/*"
+        ]
+      }
+    ]
+  }
+}
+
